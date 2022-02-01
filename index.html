@@ -19,12 +19,23 @@
     第三个组件
     <div class="like_button_container" data-commentid="3"></div>
   </p>
+  <p>
+    JSX组件
+    <div id="jsx"></div>
+  </p>
 
   <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
   <!-- 加载react组件 -->
   <script src="like_button.js"></script>
+
+  <script type="text/babel">
+    ReactDOM.render(
+      <div>JSX</div>,
+      document.getElementById('jsx')
+    )
+  </script>
 </body>
 </html>
