@@ -1,0 +1,23 @@
+{
+  "name": "document-react",
+  "version": "1.0.0",
+  "description": "react文档精读",
+  "main": "like_button.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiltonX/document-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hiltonX/document-react/issues"
+  },
+  "homepage": "https://github.com/hiltonX/document-react#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^10.0.1"
+  }
+}
