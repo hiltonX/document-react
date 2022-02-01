@@ -2,26 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 
-function formatName(user) {
-  return user.firstName + ' ' + user.lastName
-}
+// 通过使用引号，来将属性值指定为字符串字面量
+// const element = <div tabIndex="0"></div>
 
 const user = {
-  firstName: '大',
-  lastName: '姐姐1'
+  avatarUrl: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0306%2F701a4922j00qpjng1001nc000ht00dom.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1646308771&t=376abf8646bcad35c9394b6b82c363b4'
 }
-
-function getGreenting(user) {
-  if (user) {
-    return <h1>hello, {formatName(user)}</h1>
-  }
-
-  return <h1>hello, 没有user</h1>
-}
-
-
+// 通过使用大括号，来在属性值中插入一个js表达式
+const element = <img src={user.avatarUrl}></img>
 ReactDOM.render(
-  getGreenting(user),
+  element,
   document.getElementById('root')
 )
 
