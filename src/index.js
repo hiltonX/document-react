@@ -114,18 +114,35 @@ import ReactDOM from 'react-dom'
 // }
 
 
-ReactDOM.render(
-  // Welcome({
-  //   name: '大姐姐'
-  // }),
-  // element,
-  Comment({
-    author: {
-      name: '李健',
-      avatarUrl: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0306%2F701a4922j00qpjng1001nc000ht00dom.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1646308771&t=376abf8646bcad35c9394b6b82c363b4'
-    },
-    text: '李健呜呜呜呜',
-    date: '2020-01-01'
-  }),
-  document.getElementById('root')
-)
+// ReactDOM.render(
+//   // Welcome({
+//   //   name: '大姐姐'
+//   // }),
+//   // element,
+//   Comment({
+//     author: {
+//       name: '李健',
+//       avatarUrl: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fnimg.ws.126.net%2F%3Furl%3Dhttp%3A%2F%2Fdingyue.ws.126.net%2F2021%2F0306%2F701a4922j00qpjng1001nc000ht00dom.jpg%26thumbnail%3D650x2147483647%26quality%3D80%26type%3Djpg&refer=http%3A%2F%2Fnimg.ws.126.net&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1646308771&t=376abf8646bcad35c9394b6b82c363b4'
+//     },
+//     text: '李健呜呜呜呜',
+//     date: '2020-01-01'
+//   }),
+//   document.getElementById('root')
+// )
+
+//  封装时钟的外观
+function Clock(props) {
+  return (<div>
+    <h1>Hello, world!</h1>
+    <h2>It is {props.date.toLocaleTimeString()}</h2>
+  </div>)
+}
+
+function tick() {
+  ReactDOM.render(
+    <Clock date={new Date()}/>,
+    document.getElementById('root')
+  )
+}
+
+setInterval(tick, 1000)

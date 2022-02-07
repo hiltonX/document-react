@@ -19,3 +19,6 @@ https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c（打不开）
 - 纯函数：不修改入参，多次调用下相同入参始终返回相同结果
 
 - 所有的React组件都必须像纯函数一样保护他们的props不被更改
+
+### State&&生命周期
+- State与props类似，但是state是私有的，并且完全受控于当前组件
