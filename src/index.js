@@ -50,11 +50,16 @@ class Welcome extends React.Component {
   }
 }
 
-
+const element = <Welcome name="大姐姐1"/>
+// 过程
+// 调用ReactDOM.render()函数，传入<Welcome name="大姐姐1" />作为参数
+// React调用Welcome组件，将 {name: '大姐姐1'}作为props传入
+// Welcome组件将<h1>Hello, 大姐姐1</h1>元素作为返回值
+// React DOM将DOM高效地更新为<h1>Hello, 大姐姐1</h1>
 ReactDOM.render(
   // Welcome({
   //   name: '大姐姐'
   // }),
-  <Welcome name="大姐姐1" />,
+  element,
   document.getElementById('root')
 )
