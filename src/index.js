@@ -70,48 +70,48 @@ import ReactDOM from 'react-dom'
 
 
 // 提取组件
-function formatDate(text) {
-  return text
-}
-// 建议从组件自身角度命名props
-function Avatar(props) {
-  return (<img 
-    src={props.user.avatarUrl}
-    alt={props.user.name}
-  />)
-}
+// function formatDate(text) {
+//   return text
+// }
+// // 建议从组件自身角度命名props
+// function Avatar(props) {
+//   return (<img 
+//     src={props.user.avatarUrl}
+//     alt={props.user.name}
+//   />)
+// }
 
-function UserInfo(props) {
-  return (
-    <div className="user-info">
-      <Avatar user={props.user} />
-      <div className="user-info-name">
-        {props.user.name}
-      </div>
-    </div>
-  )
-}
+// function UserInfo(props) {
+//   return (
+//     <div className="user-info">
+//       <Avatar user={props.user} />
+//       <div className="user-info-name">
+//         {props.user.name}
+//       </div>
+//     </div>
+//   )
+// }
 
-function Comment(props) {
-  return (<div className="comment">
-    {/* <div className="user-info">
-      <img className="avatar" 
-        src={props.author.avatarUrl}
-        alt={props.author.name}
-      />
-      <div className="user-info-name">
-        {props.author.name}
-      </div>
-    </div> */}
-    <UserInfo user={props.author}/>
-    <div className="comment-text">
-      {props.text}
-    </div>
-    <div className="comment-date"> 
-      {formatDate(props.date)}
-    </div>
-  </div>)
-}
+// function Comment(props) {
+//   return (<div className="comment">
+//     {/* <div className="user-info">
+//       <img className="avatar" 
+//         src={props.author.avatarUrl}
+//         alt={props.author.name}
+//       />
+//       <div className="user-info-name">
+//         {props.author.name}
+//       </div>
+//     </div> */}
+//     <UserInfo user={props.author}/>
+//     <div className="comment-text">
+//       {props.text}
+//     </div>
+//     <div className="comment-date"> 
+//       {formatDate(props.date)}
+//     </div>
+//   </div>)
+// }
 
 
 ReactDOM.render(
