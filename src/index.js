@@ -131,11 +131,30 @@ import ReactDOM from 'react-dom'
 // )
 
 //  封装时钟的外观
-function Clock(props) {
-  return (<div>
-    <h1>Hello, world!</h1>
-    <h2>It is {props.date.toLocaleTimeString()}</h2>
-  </div>)
+// function Clock(props) {
+//   return (<div>
+//     <h1>Hello, world!</h1>
+//     <h2>It is {props.date.toLocaleTimeString()}</h2>
+//   </div>)
+// }
+
+// 把函数组件转换成class组件
+// 1. 创建一个同名的ES6 class，并且继承于React.Component
+// 2. 添加一个空的render()方法
+// 3. 将函数体移动到render()方法之中
+// 4. 在render()方法中使用this.props替换props
+// 5. 删除剩余的空函数声明
+
+// 每次组件更新，render方法都会被调用，但只要在相同的DOM节点中渲染<Clock />，就仅有一个Clock组件的class实例被创建使用。
+// 这就使得我们可以使用如state或生命周期方法等很多其他特性
+
+class Clock extends React.Component {
+  render() {
+    return <div>
+      <h1>Hello, world!</h1>
+      <h2>It is {this.props.date.toLocaleString()}</h2>
+    </div>
+  }
 }
 
 function tick() {
