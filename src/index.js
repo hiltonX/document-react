@@ -13,14 +13,28 @@ import ReactDOM from 'react-dom'
 // const element = <img src={user.avatarUrl} />
 
 // jsx标签里可以包含很多子元素
-const element = (
-  <div>
-    <h1>Hello</h1>
-    <h2>you see see you</h2>
-  </div>
-)
-ReactDOM.render(
-  element,
-  document.getElementById('root')
-)
+// const element = (
+//   <div>
+//     <h1>Hello</h1>
+//     <h2>you see see you</h2>
+//   </div>
+// )
+
+// ReactDOM.render(
+//   element,
+//   document.getElementById('root')
+// )
+
+
+function tick() {
+  const element = (<div>
+    <h1>hello, world!</h1>
+    <h2>It is {new Date().toLocaleTimeString()}</h2>
+  </div>)
+
+  ReactDOM.render(element, document.getElementById('root'))
+}
+
+
+setInterval(tick, 1000)
 
