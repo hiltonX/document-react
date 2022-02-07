@@ -26,15 +26,35 @@ import ReactDOM from 'react-dom'
 // )
 
 
-function tick() {
-  const element = (<div>
-    <h1>hello, world!</h1>
-    <h2>It is {new Date().toLocaleTimeString()}</h2>
-  </div>)
+// function tick() {
+//   const element = (<div>
+//     <h1>hello, world!</h1>
+//     <h2>It is {new Date().toLocaleTimeString()}</h2>
+//   </div>)
 
-  ReactDOM.render(element, document.getElementById('root'))
+//   ReactDOM.render(element, document.getElementById('root'))
+// }
+
+
+// setInterval(tick, 1000)
+
+// 函数组件
+// function Welcome(props) {
+//   return <h1>hello, {props.name}</h1>
+// }
+
+// class定义
+class Welcome extends React.Component {
+  render() {
+    return <h1>hello, {this.props.name}</h1>
+  }
 }
 
 
-setInterval(tick, 1000)
-
+ReactDOM.render(
+  // Welcome({
+  //   name: '大姐姐'
+  // }),
+  <Welcome name="大姐姐1" />,
+  document.getElementById('root')
+)
