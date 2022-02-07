@@ -50,7 +50,18 @@ class Welcome extends React.Component {
   }
 }
 
-const element = <Welcome name="大姐姐1"/>
+// const element = <Welcome name="大姐姐1"/>
+
+function App() {
+  return (
+    <div>
+      <Welcome name="大姐姐" />
+      <Welcome name="大姐姐1" />
+      <Welcome name="大姐姐2" />
+    </div>
+  )
+}
+
 // 过程
 // 调用ReactDOM.render()函数，传入<Welcome name="大姐姐1" />作为参数
 // React调用Welcome组件，将 {name: '大姐姐1'}作为props传入
@@ -60,6 +71,7 @@ ReactDOM.render(
   // Welcome({
   //   name: '大姐姐'
   // }),
-  element,
+  // element,
+  App(),
   document.getElementById('root')
 )
