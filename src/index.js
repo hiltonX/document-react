@@ -162,6 +162,12 @@ import ReactDOM from 'react-dom'
 // 3. clock输出被插入到DOM中，react调用ComponentDidMount()生命周期方法。clock组件向浏览器请求设置一个定时器每秒调用一次组件的tick方法
 // 4. clock组件会通过调用setState()来计划进行一次ui更新。 setState()调用后，react能够知道state已经改变，然后会重新调用render()方法来确定页面上该显示什么
 // 5. Clock组件从DOM中被移除，react调用componentWillUnmount()生命周期方法，清除计时器
+function FormattedDate(props) {
+  return <h2>数据是向下流动的：{props.date.toLocaleTimeString()}</h2>
+}
+
+
+
 class Clock extends React.Component {
   constructor(props) {
     super(props) 
@@ -189,11 +195,21 @@ class Clock extends React.Component {
     return <div>
       <h1>Hello, world!2</h1>
       <h2>It is {this.state.date.toLocaleString()}</h2>
+      <FormattedDate date={this.state.date} />
     </div>
   }
 }
 
+// 每个组件都是独立的,单向数据流
+function App() {
+  return (<div>
+    <Clock />
+    <Clock />
+    <Clock />
+  </div>)
+}
+
 ReactDOM.render(
-  <Clock />,
+  <App />,
   document.getElementById('root')
 )
