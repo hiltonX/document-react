@@ -22,3 +22,33 @@ https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c（打不开）
 
 ### State&&生命周期
 - State与props类似，但是state是私有的，并且完全受控于当前组件
+
+- 正确地使用State
+1. 不要直接修改State，而要使用setState。构造函数是唯一可以给this.state赋值的地方
+2. State的更新可能是异步的。this.props和this.state可能会被异步更新，所以不要依赖他们更新下一个状态
+3. State的更新会被合并，合并是浅合并？？？
+```
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+  }
+
+
+  componentDidMount() {
+    fetchPosts().then(response => {
+      this.setState({
+        posts: response.posts
+      })
+    })
+
+    fetchComments().then(response => {
+      this.setState({
+        comments: response.comments
+      })
+    })
+  }
+
+
+```
