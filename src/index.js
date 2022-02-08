@@ -199,6 +199,55 @@ class Clock extends React.Component {
     </div>
   }
 }
+// 事件处理
+function activateLasers() {
+  alert('activate')
+}
+
+// 阻止默认行为
+function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault()
+
+    console.log('The link was clicked')
+  }
+
+  return (
+    <a href="http://www.baidu.com" onClick={handleClick}>
+      阻止默认行为
+    </a>
+  )
+}
+
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isToggleOn: true
+    }
+    // 为了在回调中使用this，绑定必不可少
+    this.changeToggle = this.changeToggle.bind(this)
+  }
+
+  changeToggle() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }))
+  }
+
+  render() {
+    return (
+    <button
+      onClick={this.changeToggle}
+    >
+      {this.state.isToggleOn ? 'On' : 'Off'}
+    </button>
+    )
+  }
+}
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -206,8 +255,14 @@ function App() {
     <Clock />
     <Clock />
     <Clock />
+    <button onClick={activateLasers}>
+      activate lasers
+    </button>
+    <ActionLink />
+    <Toggle />
   </div>)
 }
+
 
 ReactDOM.render(
   <App />,
