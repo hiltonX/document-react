@@ -50,3 +50,13 @@ https://gist.github.com/gaearon/683e676101005de0add59e8bb345340c（打不开）
     })
   }
 ```
+
+### 事件处理
+- 向事件处理程序传递参数
+```
+<!-- 一个是使用function.prototype.bind传递 -->
+<!-- 一个是使用箭头函数传递 -->
+<!-- 箭头函数传递e是显性的，bind是隐性传递 -->
+<button onClick={this.deleteRow.bind(this,id)}>delete row</button>
+<button onClick={(e) => this.delete(id, e)}>delete row</button>
+```

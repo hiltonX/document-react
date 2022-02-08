@@ -228,10 +228,10 @@ class Toggle extends React.Component {
       isToggleOn: true
     }
     // 为了在回调中使用this，绑定必不可少
-    this.changeToggle = this.changeToggle.bind(this)
+    // this.changeToggle = this.changeToggle.bind(this)
   }
 
-  changeToggle() {
+  changeToggle (){
     this.setState(state => ({
       isToggleOn: !state.isToggleOn
     }))
@@ -240,7 +240,9 @@ class Toggle extends React.Component {
   render() {
     return (
     <button
-      onClick={this.changeToggle}
+      // 箭头函数作为props传入子组件时，组件可能会进行额外的重新渲染
+      // 通常建议在构造器中绑定或者使用class fields语法来避免性能问题 
+      onClick={() => this.changeToggle()}
     >
       {this.state.isToggleOn ? 'On' : 'Off'}
     </button>
