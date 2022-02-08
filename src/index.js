@@ -138,6 +138,15 @@ import ReactDOM from 'react-dom'
 //   </div>)
 // }
 
+// function tick() {
+//   ReactDOM.render(
+//     <Clock />,
+//     document.getElementById('root')
+//   )
+// }
+
+// setInterval(tick, 1000)
+
 // 把函数组件转换成class组件
 // 1. 创建一个同名的ES6 class，并且继承于React.Component
 // 2. 添加一个空的render()方法
@@ -148,20 +157,43 @@ import ReactDOM from 'react-dom'
 // 每次组件更新，render方法都会被调用，但只要在相同的DOM节点中渲染<Clock />，就仅有一个Clock组件的class实例被创建使用。
 // 这就使得我们可以使用如state或生命周期方法等很多其他特性
 
+// 1. <Clock />传给ReactDOM.render()的时候，react调用clock的构造函数。所以需要初始化this.state 
+// 2. render调用组件的render()方法。确定该页面上展示什么，然后更新DOM匹配clock的渲染输出
+// 3. clock输出被插入到DOM中，react调用ComponentDidMount()生命周期方法。clock组件向浏览器请求设置一个定时器每秒调用一次组件的tick方法
+// 4. clock组件会通过调用setState()来计划进行一次ui更新。 setState()调用后，react能够知道state已经改变，然后会重新调用render()方法来确定页面上该显示什么
+// 5. Clock组件从DOM中被移除，react调用componentWillUnmount()生命周期方法，清除计时器
 class Clock extends React.Component {
+  constructor(props) {
+    super(props) 
+
+    this.state = {date: new Date()}
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => 
+      this.tick(), 1000
+    )
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID)
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    })
+  }
+
   render() {
     return <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {this.props.date.toLocaleString()}</h2>
+      <h1>Hello, world!2</h1>
+      <h2>It is {this.state.date.toLocaleString()}</h2>
     </div>
   }
 }
 
-function tick() {
-  ReactDOM.render(
-    <Clock date={new Date()}/>,
-    document.getElementById('root')
-  )
-}
-
-setInterval(tick, 1000)
+ReactDOM.render(
+  <Clock />,
+  document.getElementById('root')
+)
