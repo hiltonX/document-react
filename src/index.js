@@ -269,8 +269,31 @@ function Getting(props) {
 }
 
 
+function Login() {
+  return <div>Login</div>
+}
+
+function Logout() {
+  return <div>Logout</div>
+}
 
 
+class loginCtrol extends React.Components {
+  constructor() {
+    super(props)
+
+
+  }
+
+
+  render() {
+    return (
+      
+    )
+  }
+
+  
+}
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -283,6 +306,9 @@ function App() {
     </button>
     <ActionLink />
     <Toggle />
+    {/* 条件渲染 */}
+    <h2>条件渲染</h2>
+    <h3>if或者条件运算</h3>
     <Getting isUser={true}/>
     <Getting isUser={false}/>
   </div>)
