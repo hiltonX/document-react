@@ -251,6 +251,27 @@ class Toggle extends React.Component {
 }
 
 
+// 7. 条件渲染
+function UserGetting() {
+  return <div>userGetting</div>
+}
+
+function GuestGetting() {
+  return <div>guestGetting</div>
+}
+
+function Getting(props) {
+  if (props.isUser) {
+    return <UserGetting />
+  }
+
+  return <GuestGetting />
+}
+
+
+
+
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -262,9 +283,10 @@ function App() {
     </button>
     <ActionLink />
     <Toggle />
+    <Getting isUser={true}/>
+    <Getting isUser={false}/>
   </div>)
 }
-
 
 ReactDOM.render(
   <App />,
