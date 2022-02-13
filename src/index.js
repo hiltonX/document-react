@@ -269,28 +269,58 @@ function Getting(props) {
 }
 
 
-function Login() {
-  return <div>Login</div>
+function Login(props) {
+  return <button onClick={props.onClick}>Login</button>
 }
 
-function Logout() {
-  return <div>Logout</div>
+function Logout(props) {
+  return <button onClick={props.onClick}>Logout</button>
 }
 
 
-class loginCtrol extends React.Components {
-  constructor() {
+class LoginCtrol extends React.Component {
+  constructor(props) {
     super(props)
 
+    this.handleLoginClick = this.handleLoginClick.bind(this)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
 
+    this.state = {
+      isLogin : false
+    }
+  }
+
+  handleLoginClick() {
+    this.setState({
+      isLogin: true
+    })
+  }
+
+  handleLogoutClick() {
+    this.setState({
+      isLogin: false
+    })
   }
 
 
   render() {
+    const { isLogin } = this.state
+    let button
+    if (isLogin) {
+      button = <Logout onClick={this.handleLogoutClick}/>
+    } else {
+      button = <Login onClick={this.handleLoginClick}/>
+    }
+
+
     return (
-      
+      <div>
+        <Getting isUser={isLogin}/>
+        { button }
+      </div>
     )
   }
+
 
   
 }
@@ -311,6 +341,7 @@ function App() {
     <h3>if或者条件运算</h3>
     <Getting isUser={true}/>
     <Getting isUser={false}/>
+    <LoginCtrol />
   </div>)
 }
 
