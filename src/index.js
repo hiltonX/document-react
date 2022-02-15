@@ -415,7 +415,16 @@ const double = numbers.map(number => number * 2)
 console.log(double)
 
 // 渲染多个组件
-const listItems = numbers.map(number => <li>{number}</li>)
+const listItems = numbers.map(number => <li key={number.toString()}>{number}</li>)
+
+// 基础列表组件
+function NumbersList(props) {
+  const { numbers = [] } = props
+
+  const listItems = numbers.map(number => <li key={number.toString()}>{number}</li>)
+
+  return (<ul>{listItems}</ul>)
+}
 
 
 
@@ -445,6 +454,8 @@ function App() {
     <h2>列表&key</h2>
     <h3>渲染多个组件</h3>
     <ul>{listItems}</ul>
+    <h3>基础列表组件</h3>
+    <NumbersList numbers={numbers}/>
   </div>)
 }
 
