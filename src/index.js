@@ -408,11 +408,14 @@ class Page extends React.Component {
     </div>)
   }
 }
-
+// =========== 列表&key ==============
 // doubled
 const numbers = [1, 2, 3, 4, 5]
 const double = numbers.map(number => number * 2)
 console.log(double)
+
+// 渲染多个组件
+const listItems = numbers.map(number => <li>{number}</li>)
 
 
 
@@ -440,6 +443,8 @@ function App() {
     <h3>阻止组件渲染</h3>
     <Page />
     <h2>列表&key</h2>
+    <h3>渲染多个组件</h3>
+    <ul>{listItems}</ul>
   </div>)
 }
 
