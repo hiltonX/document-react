@@ -276,8 +276,6 @@ function Login(props) {
 function Logout(props) {
   return <button onClick={props.onClick}>Logout</button>
 }
-
-
 class LoginCtrol extends React.Component {
   constructor(props) {
     super(props)
@@ -335,6 +333,39 @@ function Mailbox(props) {
 const message = ['李健', '千玺', '炎亚纶']
 
 
+// 三目运算符
+class Ternary extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleLoginClick = this.handleLoginClick.bind(this)
+    this.handleLogoutClick = this.handleLogoutClick.bind(this)
+    this.state = {
+      isLogin: true
+    }
+  }
+
+  handleLoginClick() {
+    this.setState({
+      isLogin: true
+    })
+  }
+
+  handleLogoutClick() {
+    this.setState({
+      isLogin: false
+    })
+  }
+  render() {
+    return (<div>
+      <div>The user is { this.state.isLogin ? 'currently' : 'not' } Login in</div>
+      { this.state.isLogin ? <Logout onClick={this.handleLogoutClick}/> : <Login onClick={this.handleLoginClick}/> }
+    </div>)
+  }
+}
+
+
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -354,6 +385,8 @@ function App() {
     <LoginCtrol />
     <h3>与运算符</h3>
     <Mailbox unreadMessage={message}/>
+    <h3>三目运算符</h3>
+    <Ternary />
   </div>)
 }
 
