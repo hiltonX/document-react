@@ -470,6 +470,38 @@ const posts = [
   {key: 1, title: 'hello world', content: 'welcome to leaning react'},
   {key: 2, title: 'installation', content: 'you can install react from npm'}
 ]
+
+// key不会传递给组件
+function PostItem(props) {
+  const {key, id} = props
+
+  return <div>
+    <span>id: {id}</span>
+    <span>key: {key}</span>
+  </div>
+}
+
+function Posts(props) {
+  const content = props.posts.map(item => <PostItem id={item.id} key={item.key}/>)
+
+  return content
+}
+
+// 在JSX中嵌入map
+function ListItem(props) {
+  return <li>{props.value}</li>
+}
+function NumberList(props) {
+  const listItems = props.numbers.map(item => <ListItem key={item.toString()} value={item}/>)
+
+  return (<ul>{listItems}</ul>)
+}
+
+// jsx可以在{}中嵌入任何表达式，内联map
+function NumberListInline(props) {
+  return (<ul>{props.numbers.map(item => <ListItem key={item.toString()} value={item}/>)}</ul>)
+}
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -507,6 +539,14 @@ function App() {
     <TodoList todos={todos} />
     <h3>key只是在兄弟节点中必须唯一</h3>
     <Blog posts={posts}/>
+    <h3>key不会传递给组件</h3>
+    PostItem: `key` is not a prop
+    <Posts posts={posts}/>
+    <h3>在JSX中嵌入map</h3>
+    <NumberList numbers={numbers}/>
+    <h3>内联map</h3>
+    <span>JSX可以在{}中嵌入任何表达式</span>
+    <NumberListInline numbers={numbers}/>
   </div>)
 }
 
