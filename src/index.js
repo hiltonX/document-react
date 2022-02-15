@@ -364,6 +364,51 @@ class Ternary extends React.Component {
   }
 }
 
+// 阻止组件渲染
+function WarningBanner(props) {
+  
+  if (!props.warn) {
+    return null
+  }
+
+  return (<div>
+    Warning!
+  </div>)
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isWarning: true
+    }
+
+    this.handleToggleClick = this.handleToggleClick.bind(this)
+  }
+
+
+  handleToggleClick() {
+    this.setState((state) => (
+      {
+        isWarning: !state.isWarning
+      }
+    ))
+  }
+
+  render() {
+    return (<div>
+        <WarningBanner warn={this.state.isWarning}/>
+
+      <button
+        onClick={this.handleToggleClick}
+      > 
+        {this.state.isWarning ? 'hide' : 'show'}
+      </button>
+    </div>)
+  }
+}
+
 
 
 // 每个组件都是独立的,单向数据流
@@ -387,6 +432,8 @@ function App() {
     <Mailbox unreadMessage={message}/>
     <h3>三目运算符</h3>
     <Ternary />
+    <h3>阻止组件渲染</h3>
+    <Page />
   </div>)
 }
 
