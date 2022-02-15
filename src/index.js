@@ -409,6 +409,11 @@ class Page extends React.Component {
   }
 }
 
+// doubled
+const numbers = [1, 2, 3, 4, 5]
+const double = numbers.map(number => number * 2)
+console.log(double)
+
 
 
 // 每个组件都是独立的,单向数据流
@@ -434,6 +439,7 @@ function App() {
     <Ternary />
     <h3>阻止组件渲染</h3>
     <Page />
+    <h2>列表&key</h2>
   </div>)
 }
 
