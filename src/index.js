@@ -426,8 +426,50 @@ function NumbersList(props) {
   return (<ul>{listItems}</ul>)
 }
 
+//key
+const todos = [{
+  id: '1',
+  text: '李健'
+}, {
+  id: '2',
+  text: '千玺'
+}]
+// 使用id作为key
+const todoItems = todos.map(item => <li key={item.id}>{item.text}</li>)
+// 用key提取组件
+function todoItem(props) {
+  return <div>{props.text}</div>
+}
 
+function TodoList(props) {
+  const { todos } = props
+  // 正确的key应该在数组的上下文被指定;即在map方法中的元素需要设置key
+  const todoItems = todos.map(item => <li key={item.id}>{item.text}</li>)
 
+  return (<ul>{todoItems}</ul>)
+}
+// key只是在兄弟节点中必须唯一
+function Blog(props) {
+  const sidebar = (<ul>{props.posts.map(item => <li key={item.key}>{item.title}</li>)}</ul>)
+
+  const content = (<div>{
+    props.posts.map(item => <div key={item.key}>
+      <h3>{item.title}</h3>
+      <p>{item.content}</p>
+    </div>)
+  }</div>)
+
+  return (<div>
+    {sidebar}
+    <hr />
+    {content}
+  </div>)
+}
+
+const posts = [
+  {key: 1, title: 'hello world', content: 'welcome to leaning react'},
+  {key: 2, title: 'installation', content: 'you can install react from npm'}
+]
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -456,6 +498,15 @@ function App() {
     <ul>{listItems}</ul>
     <h3>基础列表组件</h3>
     <NumbersList numbers={numbers}/>
+    <h3>key</h3>
+    <span>key帮助react识别哪些元素改变了。一个元素的key最好是这个元素在列表中拥有的一个独一无二的字符串。</span>
+    <span>当元素id没有确定时，迫不得已可以使用元素索引index作为key。如果列表变化，会导致性能变差，还可能引起组件状态问题。</span>
+    <h3>用id作为key</h3>
+    <ul>{todoItems}</ul>
+    <h3>用key提取组件</h3>
+    <TodoList todos={todos} />
+    <h3>key只是在兄弟节点中必须唯一</h3>
+    <Blog posts={posts}/>
   </div>)
 }
 
