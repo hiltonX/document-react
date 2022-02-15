@@ -320,10 +320,20 @@ class LoginCtrol extends React.Component {
       </div>
     )
   }
-
-
-  
 }
+
+// 与运算符
+function Mailbox(props) {
+  const unreadMessage = props.unreadMessage
+
+  return (<div>
+    <div>hello</div>
+      { unreadMessage.length > 0 && <div>你有{ unreadMessage.length }条只读数据</div> }
+  </div>)
+}
+
+const message = ['李健', '千玺', '炎亚纶']
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -342,6 +352,8 @@ function App() {
     <Getting isUser={true}/>
     <Getting isUser={false}/>
     <LoginCtrol />
+    <h3>与运算符</h3>
+    <Mailbox unreadMessage={message}/>
   </div>)
 }
 
