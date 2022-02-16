@@ -584,7 +584,52 @@ class Essay extends React.Component {
     </form>)
   }
 }
+// select 标签
+function HtmlSelect() {
+  return <select>
+    <option value='1'>大姐姐</option>
+    <option value='2' selected>李健</option>
+    <option value='3'>鸣人</option>
+  </select>
+}
 
+
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: ['1', '2']
+    }
+
+    this.onChange=this.onChange.bind(this)
+    this.onSubmit=this.onSubmit.bind(this)
+  }
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    })
+  } 
+
+  onSubmit(e) {
+    alert(this.state.value)
+    e.preventDefault()
+  }
+
+  render() {
+    return (<form>
+      <label>
+        最喜欢的
+        <select multiple={true} value={this.state.value} onChange={this.onChange}>
+          <option value="1">大姐姐</option>
+          <option value="2">李健</option>
+      </select>
+    </label>
+    <input type="submit" onClick={this.onSubmit}/>
+    </form>)
+  }
+}
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -641,6 +686,9 @@ function App() {
     <span>在html中textarea通过子元素确定内容</span>
     <HtmlTextArea />
     <Essay />
+    <h3>select标签</h3>
+    <HtmlSelect />
+    <FlavorForm />
   </div>)
 }
 
