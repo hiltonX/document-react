@@ -546,6 +546,46 @@ class NameForm extends React.Component {
   }
 }
 
+// textarea标签
+function HtmlTextArea() {
+  return <textarea>这里时textarea标签</textarea>
+}
+
+class Essay extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: '随便写啥'
+    }
+
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
+  onSubmit(e) {
+    alert(this.state.value)
+
+    e.preventDefault()
+  }
+
+
+  render() {
+    return (<form>
+      <label>文章：<textarea value={this.state.value} onChange={this.onChange} /></label>
+      <input type="submit" onClick={this.onSubmit} />
+    </form>)
+  }
+}
+
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -597,6 +637,10 @@ function App() {
     <HtmlForm />
     <h3>受控组件</h3>
     <NameForm />
+    <h3>textarea标签</h3>
+    <span>在html中textarea通过子元素确定内容</span>
+    <HtmlTextArea />
+    <Essay />
   </div>)
 }
 
