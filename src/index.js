@@ -631,6 +631,11 @@ class FlavorForm extends React.Component {
   }
 }
 
+// 文件input标签
+function FileInput() {
+  return <input type="file"/>
+}
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -689,6 +694,9 @@ function App() {
     <h3>select标签</h3>
     <HtmlSelect />
     <FlavorForm />
+    <h3>文件input标签</h3>
+    <span>因为value是只读的，所以只非控组件</span>
+    <FileInput />
   </div>)
 }
 
