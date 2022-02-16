@@ -510,6 +510,41 @@ function HtmlForm() {
     <input type="submit" value="提交" />
   </form>)
 }
+// 受控组件
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state={
+      value: undefined
+    }
+
+    this.onChange = this.onChange.bind(this)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onChange(e) {
+
+    this.setState({
+      value: e.target.value
+    })
+  }
+
+  onSubmit(e) {
+    alert(this.state.value)
+    e.preventDefault()
+  }
+
+
+  render() {
+    return (<form>
+      <label>
+        姓名 <input name="name" type="text" value={this.state.value} onChange={this.onChange}/>
+      </label>
+      <input type="submit" value="提交" onClick={this.onSubmit}/>
+    </form>)
+  }
+}
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -558,7 +593,10 @@ function App() {
     <NumberListInline numbers={numbers}/>
     <h2>表单</h2>
     <h3>纯HTML表单</h3>
+    <span>表单的默认行为：提交表单后刷新页面</span>
     <HtmlForm />
+    <h3>受控组件</h3>
+    <NameForm />
   </div>)
 }
 
