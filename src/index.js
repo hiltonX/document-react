@@ -502,6 +502,15 @@ function NumberListInline(props) {
   return (<ul>{props.numbers.map(item => <ListItem key={item.toString()} value={item}/>)}</ul>)
 }
 
+// ========== 表单 ============= 
+// 纯HTML表单
+function HtmlForm() {
+  return (<form>
+    <label>名字 <input name="name" type="text" /></label>
+    <input type="submit" value="提交" />
+  </form>)
+}
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -547,6 +556,9 @@ function App() {
     <h3>内联map</h3>
     <span>JSX可以在{}中嵌入任何表达式</span>
     <NumberListInline numbers={numbers}/>
+    <h2>表单</h2>
+    <h3>纯HTML表单</h3>
+    <HtmlForm />
   </div>)
 }
 
