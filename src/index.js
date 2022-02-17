@@ -636,6 +636,37 @@ function FileInput() {
   return <input type="file"/>
 }
 
+// 处理多个输入
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isGoing: true,
+      numberOfGuest: 2
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(e) {
+    const { target } = e
+
+    const value = target.name === 'isGoing' ? target.checked : target.value
+
+    this.setState({
+      [target.name]: value
+    })
+  }
+
+  render() {
+    return (<form>
+      <label>参与： <input name="isGoing" type="checkbox" value={this.state.isGoing} onChange={this.handleChange}/></label>
+      <label>人数: <input name="numberOfGuest" type="number" value={this.state.numberOfGuest} onChange={this.handleChange}/></label>
+    </form>)
+  }
+}
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -697,6 +728,8 @@ function App() {
     <h3>文件input标签</h3>
     <span>因为value是只读的，所以只非控组件</span>
     <FileInput />
+    <h3>处理多个输入</h3>
+    <Reservation />
   </div>)
 }
 
