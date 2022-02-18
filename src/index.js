@@ -667,6 +667,12 @@ class Reservation extends React.Component {
   }
 }
 
+// 受控输入空值
+// ReactDOM.render(<input value="1"/>, document.getElementById('empty'))
+// setTimeout(function() {
+//   ReactDOM.render(<input value={null}/>, document.getElementById('empty'))
+// }, 2000)
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -731,16 +737,14 @@ function App() {
     <FileInput />
     <h3>处理多个输入</h3>
     <Reservation />
+    <h3>受控组件输入空值</h3>
+    <span>如果受控组件指定value的props，会阻止用户更改输入。 undefined或者null除外</span>
   </div>)
 }
 
-// ReactDOM.render(
-//   <App />,
-//   document.getElementById('root')
-// )
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)
 
 
-// ReactDOM.render(<input value="1"/>, mountNode)
-// setTimeout(function() {
-//   ReactDOM.render(<input value={null}/>, mountNode)
-// }, 1000)
