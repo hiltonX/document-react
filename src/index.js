@@ -667,6 +667,7 @@ class Reservation extends React.Component {
   }
 }
 
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -733,7 +734,13 @@ function App() {
   </div>)
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+// ReactDOM.render(
+//   <App />,
+//   document.getElementById('root')
+// )
+
+
+// ReactDOM.render(<input value="1"/>, mountNode)
+// setTimeout(function() {
+//   ReactDOM.render(<input value={null}/>, mountNode)
+// }, 1000)
