@@ -739,6 +739,8 @@ function App() {
     <Reservation />
     <h3>受控组件输入空值</h3>
     <span>如果受控组件指定value的props，会阻止用户更改输入。 undefined或者null除外</span>
+    <h3>受控组件成熟解决方案</h3>
+    <span><a href="https://formik.org/">Formik</a>,包含验证、追踪访问字段以及处理表单提交的完整解决方案</span>
   </div>)
 }
 
