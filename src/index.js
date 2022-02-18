@@ -682,6 +682,31 @@ function BoilingVerdict(props) {
   return <p>水没开</p>
 }
 
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      temprature: ''
+    }
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(e) {
+    this.setState({
+      temprature: e.target.value
+    })
+  }
+  render() {
+    return (<fieldset>
+      <legend>Enter temprature in Celsius:</legend>
+      <input value={this.state.temprature} onChange={this.onChange}/>
+      <BoilingVerdict celsius={this.state.temprature}/>
+    </fieldset>)
+  }
+}
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -753,6 +778,8 @@ function App() {
     <h2>状态提升</h2>
     <h3>BoilingVerdict组件</h3>
     <BoilingVerdict />
+    <h3>Calculator组件</h3>
+    <Calculator />
   </div>)
 }
 
