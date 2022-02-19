@@ -707,31 +707,36 @@ class Calculator extends React.Component {
   }
 }
 
+// 状态提升
 const scaleNames = {
   c: 'Celsius',
   f: 'Fahrenheit'
+}
 class TempratureInput extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      temprature: 10
-    }
+    // this.state = {
+    //   temprature: 10
+    // }
 
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(e) {
-    this.setState({
-      temprature: e.target.value
-    })
+    // this.setState({
+    //   temprature: e.target.value
+    // })
+
+    this.props.onChange(e.target.value)
   }
 
   render() {
     const {scale} = this.props
     return (<fieldset>
       <legend>Enter temprature in {scaleNames[scale]}</legend>
-      <input value={this.state.temprature} onChange={this.onChange}/>
+      {/* <input value={this.state.temprature} onChange={this.onChange}/> */}
+      <input value={this.props.temprature} onChange={this.onChange}/>
     </fieldset>)
   }
 }
@@ -744,7 +749,7 @@ function toFahrenheit(celsius) {
   return (celsius * 9 / 5) + 32
 }
 
-function tryCOnvert(temprature, conver) {
+function tryConvert(temprature, conver) {
   const input = parseFloat(temprature)
 
   if (Number.isNaN(input)) {
@@ -755,6 +760,58 @@ function tryCOnvert(temprature, conver) {
   const rounded = Math.round(output * 1000) / 1000
   return rounded.toString()
 }
+
+// 状态提升
+class CalculatorPage extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleCelsiusChange = this.handleCelsiusChange.bind(this)
+    this.handleFahrenheit = this.handleFahrenheit.bind(this)
+
+    this.state = {
+      temprature: '',
+      scale: 'c'
+    }
+  }
+
+  handleCelsiusChange(temprature) {
+    this.setState({
+      temprature,
+      scale: 'c'
+    })
+  }
+
+  handleFahrenheit(temprature) {
+    this.setState({
+      temprature,
+      scale: 'f'
+    })
+  }
+
+  render() {
+    const { scale, temprature } = this.state
+
+    const celsius = scale === 'f' ? tryConvert(temprature, toCelsius) : temprature
+    const fahrenheit = scale === 'c' ? tryConvert(temprature, toFahrenheit) : temprature
+    
+    return (<div>
+      <TempratureInput 
+        onChange={this.handleCelsiusChange}
+        temprature={celsius}
+        scale={this.state.scale}
+      />
+      <TempratureInput 
+        onChange={this.handleFahrenheit}
+        temprature={fahrenheit}
+        scale={this.state.scale}
+      />
+      <BoilingVerdict celsius={parseFloat(celsius)}/>
+    </div>)
+  }
+}
+
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -828,9 +885,11 @@ function App() {
     <BoilingVerdict />
     <h3>Calculator组件</h3>
     <Calculator />
-    <h3>组合</h3>
+    <h3>组合&状态提升</h3>
     <TempratureInput scale="c"/>
     <TempratureInput scale="f" />
+    <h3>状态提升</h3>
+    <CalculatorPage />
   </div>)
 }
 
