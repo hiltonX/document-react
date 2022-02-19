@@ -710,7 +710,6 @@ class Calculator extends React.Component {
 const scaleNames = {
   c: 'Celsius',
   f: 'Fahrenheit'
-}
 class TempratureInput extends React.Component {
   constructor(props) {
     super(props)
@@ -736,8 +735,26 @@ class TempratureInput extends React.Component {
     </fieldset>)
   }
 }
+// 便携转换函数
+function toCelsius(fahrenheit) {
+  return (fahrenheit - 32) * 5 / 9
+}
 
+function toFahrenheit(celsius) {
+  return (celsius * 9 / 5) + 32
+}
 
+function tryCOnvert(temprature, conver) {
+  const input = parseFloat(temprature)
+
+  if (Number.isNaN(input)) {
+    return ''
+  }
+
+  const output = conver(input)
+  const rounded = Math.round(output * 1000) / 1000
+  return rounded.toString()
+}
 
 // 每个组件都是独立的,单向数据流
 function App() {
