@@ -707,6 +707,37 @@ class Calculator extends React.Component {
   }
 }
 
+const scaleNames = {
+  c: 'Celsius',
+  f: 'Fahrenheit'
+}
+class TempratureInput extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      temprature: 10
+    }
+
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(e) {
+    this.setState({
+      temprature: e.target.value
+    })
+  }
+
+  render() {
+    const {scale} = this.props
+    return (<fieldset>
+      <legend>Enter temprature in {scaleNames[scale]}</legend>
+      <input value={this.state.temprature} onChange={this.onChange}/>
+    </fieldset>)
+  }
+}
+
+
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -780,6 +811,9 @@ function App() {
     <BoilingVerdict />
     <h3>Calculator组件</h3>
     <Calculator />
+    <h3>组合</h3>
+    <TempratureInput scale="c"/>
+    <TempratureInput scale="f" />
   </div>)
 }
 
