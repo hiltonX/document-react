@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import FilterableProductTable from './filterable-product-table.js'
+
 
 // 通过使用引号，来将属性值指定为字符串字面量
 // const element = <div tabIndex="0"></div>
@@ -979,6 +981,8 @@ function App() {
     <h3>特殊关系</h3>
     <SpecialWelcomeDialog />
     <SignUpDialog />
+    <h2>React哲学</h2>
+    <FilterableProductTable />
   </div>)
 }
 
