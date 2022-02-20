@@ -811,6 +811,20 @@ class CalculatorPage extends React.Component {
   }
 }
 
+// ====== 组合 VS 继承 ========
+// 包含关系
+function FancyBorder(props) {
+  return (<div className={'fancyborder-'+props.color}>
+    {props.children}
+  </div>)
+}
+
+function WelcomeDialog() {
+  return (<FancyBorder color="blue">
+    <h1>welcome</h1>
+    <p>李健</p>
+  </FancyBorder>)
+}
 
 
 // 每个组件都是独立的,单向数据流
@@ -890,6 +904,10 @@ function App() {
     <TempratureInput scale="f" />
     <h3>状态提升</h3>
     <CalculatorPage />
+    <h2>组合 VS 继承</h2>
+    <h3>包含关系</h3>
+    <WelcomeDialog />
+
   </div>)
 }
 
