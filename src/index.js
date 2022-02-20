@@ -845,6 +845,21 @@ function RightComponent() {
   return (<div>right</div>)
 }
 
+// 特殊关系
+function Dialog(props) {
+  return (<FancyBorder color="blue">
+    <h1>{props.title}</h1>
+    <div>{props.message}</div>
+  </FancyBorder>)
+}
+
+function SpecialWelcomeDialog() {
+  return (<Dialog 
+    title={'title'}
+    message="message"
+  />)
+}
+
 // 每个组件都是独立的,单向数据流
 function App() {
   return (<div>
@@ -929,6 +944,8 @@ function App() {
       left={<LeftComponent />}
       right={<RightComponent />}
     />
+    <h3>特殊关系</h3>
+    <SpecialWelcomeDialog />
   </div>)
 }
 
