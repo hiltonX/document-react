@@ -826,6 +826,24 @@ function WelcomeDialog() {
   </FancyBorder>)
 }
 
+// 不使用children预留位置
+function SplitPane(props) {
+  return (<div>
+    <div>
+      {props.left}
+    </div>
+    <div>
+      {props.right}
+    </div>
+  </div>)
+}
+
+function LeftComponent() {
+  return (<div>left</div>)
+}
+function RightComponent() {
+  return (<div>right</div>)
+}
 
 // 每个组件都是独立的,单向数据流
 function App() {
@@ -907,7 +925,10 @@ function App() {
     <h2>组合 VS 继承</h2>
     <h3>包含关系</h3>
     <WelcomeDialog />
-
+    <SplitPane 
+      left={<LeftComponent />}
+      right={<RightComponent />}
+    />
   </div>)
 }
 
