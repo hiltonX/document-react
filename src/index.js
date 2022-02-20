@@ -850,6 +850,7 @@ function Dialog(props) {
   return (<FancyBorder color="blue">
     <h1>{props.title}</h1>
     <div>{props.message}</div>
+    {props.children}
   </FancyBorder>)
 }
 
@@ -858,6 +859,37 @@ function SpecialWelcomeDialog() {
     title={'title'}
     message="message"
   />)
+}
+
+// class形式定义组件
+class SignUpDialog extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSignUp = this.handleSignUp.bind(this)
+
+    this.state = {
+      login: ''
+    }
+  }
+
+  handleChange(e) {
+    this.setState({
+      login: e.target.value
+    })
+  }
+
+  handleSignUp() {
+    alert(this.state.login)
+  }
+
+  render() {
+    return (<Dialog title="title" message="message">
+      <input value={this.state.login} onChange={this.handleChange}/>
+      <button onClick={this.handleSignUp}>Sign me up</button>
+    </Dialog>)
+  }
 }
 
 // 每个组件都是独立的,单向数据流
@@ -946,6 +978,7 @@ function App() {
     />
     <h3>特殊关系</h3>
     <SpecialWelcomeDialog />
+    <SignUpDialog />
   </div>)
 }
 
