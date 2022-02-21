@@ -1,0 +1,17 @@
+.FBH {
+  display:flex;
+}
+
+.FB1 {
+  flex: 1;
+}
+
+.FB2 {
+  flex: 2;
+}
+
+
+.w150 {
+  width: 150px;
+}
+  
