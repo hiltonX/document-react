@@ -215,8 +215,10 @@ const AnotherComponent = React.lazy(() => import('./another-component'))
 function MultiMyComponent() {
   return (<div>
     <Suspense fallback={<div>loading</div>}>
-      <OtherComponent />
-      <AnotherComponent />
+      <section>
+        <OtherComponent />
+        <AnotherComponent />
+      </section>
     </Suspense>
   </div>)
 }
