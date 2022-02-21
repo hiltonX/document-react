@@ -193,6 +193,11 @@ class BlurExample extends React.Component {
     </div>)
   }
 }
+// ======= 代码分割 ======
+// import()
+import('./math').then(math => {
+  console.log(math.add(1, 2))
+})
 
 
 export default class Advanced extends React.Component {
@@ -224,6 +229,10 @@ export default class Advanced extends React.Component {
       <OuterClickExample />
       <div className="des">键盘设备</div>
       <BlurExample />
+      <div className="title">代码分割</div>
+      <div className="sub-title">import()</div>
+      <div className="des">CRA 开箱即用</div>
+
 
     </div>)
   }
