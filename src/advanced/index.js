@@ -42,6 +42,13 @@ function ShortGlossary(props) {
   </dl>)
 }
 
+// 标记
+function Sign() {
+  return (<div>
+    <label htmlForm="nameInput">Name</label>
+    <input id="nameInput" type="text" name="name"/>
+  </div>)
+}
 
 
 export default class Advanced extends React.Component {
@@ -64,6 +71,9 @@ export default class Advanced extends React.Component {
       <ShortGlossary 
         items={[{id: 1, term: '首先', description: '李健'}, {id: 2, term: '其次', description: '千玺'}]}
       />
+      <div className="title">无障碍表单</div>
+      <div className="sub-title">标记</div>
+      <Sign />
     </div>)
   }
 }
