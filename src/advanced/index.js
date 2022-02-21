@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 
 // ========= 无障碍 =========
 // 标准和指南
@@ -13,6 +13,37 @@ function Input() {
   />)
 }
 
+// 语义化的html
+function ListItem(props) {
+  return (<Fragment>
+    <dt>{props.item.term}</dt>
+    <dd>{props.item.description}</dd>
+  </Fragment>)
+}
+
+function Glossary(props) {
+  return (<dl>
+    {props.items.map(item => <ListItem item={item} key={item.id}/>)}
+  </dl>)
+}
+
+// 短语法
+function ShortListItem({item}) {
+  return (<>
+      <dt>{item.term}</dt>
+      <dd>{item.description}</dd>
+    </>
+  )
+}
+
+function ShortGlossary(props) {
+  return (<dl>
+    {props.items.map(item => <ListItem item={item} id={item.id}/>)}
+  </dl>)
+}
+
+
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -21,7 +52,18 @@ export default class Advanced extends React.Component {
       <div className="sub-title">无障碍辅助功能</div>
       <div className="des">无障碍辅助功能是使得辅助技术正确解读网页的必要条件</div>
       <div className="sub-title">标准和指南</div>
-      <Input />
+      <div className="content">
+        <Input />
+      </div>
+      <div className="sub-title">语义化的HTML</div>
+      <div className="des">语义化的HTML是无障碍辅助功能网络应用的基础</div>
+      <Glossary 
+        items={[{id: 1, term: '首先', description: '李健'}, {id: 2, term: '其次', description: '千玺'}]}
+      />
+      <div className="des">不需要在fragment使用props并且工具支持时，可以使用短语法</div>
+      <ShortGlossary 
+        items={[{id: 1, term: '首先', description: '李健'}, {id: 2, term: '其次', description: '千玺'}]}
+      />
     </div>)
   }
 }
