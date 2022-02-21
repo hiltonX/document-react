@@ -70,6 +70,33 @@ class CustomTextInput extends React.Component {
   }
 }
 
+// 对父组件暴露DOM ref
+function ChildCustomTextInput(props) {
+  return (<div>
+    <input ref={props.textInput}/>
+  </div>)
+} 
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.inputElement = React.createRef()
+
+
+    console.log(this.inputElement)
+  }
+
+
+  componentDidMount() {
+    // this.inputElement.current.focus()
+  }
+
+  render() {
+    return (<ChildCustomTextInput inputRef={this.inputElement}/>)
+  }
+}
+
 
 export default class Advanced extends React.Component {
 
@@ -94,6 +121,8 @@ export default class Advanced extends React.Component {
       <Sign />
       <div className="sub-title">使用程序管理焦点</div>
       <CustomTextInput />
+      <div className="des">对父组件暴露DOM refs</div>
+      <Parent />
     </div>)
   }
 }
