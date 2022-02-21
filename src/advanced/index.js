@@ -1,4 +1,8 @@
 import React, {Fragment, Suspense} from 'react'
+import ErrorBoundry from './error-boundry'
+
+const OtherComponent = React.lazy(() => import('./other-component'))
+const AnotherComponent = React.lazy(() => import('./another-component'))
 
 // ========= 无障碍 =========
 // 标准和指南
@@ -200,7 +204,6 @@ import('./math').then(math => {
 })
 
 // react.lazy
-const OtherComponent = React.lazy(() => import('./other-component'))
 
 function MyComponent() {
   return (<div>
@@ -210,7 +213,6 @@ function MyComponent() {
   </div>)
 }
 
-const AnotherComponent = React.lazy(() => import('./another-component'))
 // 包裹多个组件
 function MultiMyComponent() {
   return (<div>
@@ -220,6 +222,21 @@ function MultiMyComponent() {
         <AnotherComponent />
       </section>
     </Suspense>
+  </div>)
+}
+
+
+// 异常捕获边界
+function CatchErrorBoundry(){
+  return (<div>
+    <ErrorBoundry>
+      <Suspense fallback={<div>loading</div>}>
+        <section>
+          <OtherComponent />
+          <AnotherComponent />
+        </section>
+      </Suspense>
+    </ErrorBoundry>
   </div>)
 }
 
@@ -260,6 +277,8 @@ export default class Advanced extends React.Component {
       <MyComponent />
       <div className="des">包裹多个懒加载组件</div>
       <MultiMyComponent />
+      <div className="sub-title">异常捕获边界</div>
+      <CatchErrorBoundry />
     </div>)
   }
 }
