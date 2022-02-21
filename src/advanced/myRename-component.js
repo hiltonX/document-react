@@ -1,0 +1,1 @@
+export { RenameComponent as default } from './rename-component'

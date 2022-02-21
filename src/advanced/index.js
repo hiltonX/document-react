@@ -254,6 +254,10 @@ const App = () => (
   </Router>
 )
 
+// 命名导出
+const MyRenameComponent = React.lazy(() => import('./myRename-component'))
+
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -295,6 +299,10 @@ export default class Advanced extends React.Component {
       <CatchErrorBoundry />
       <div className="sub-title">基于路由的代码分割</div>
       <App />
+      <div className="sub-title">命名导出</div>
+      <Suspense fallback={<div>loading....</div>}>
+        <MyRenameComponent />
+      </Suspense>
     </div>)
   }
 }
