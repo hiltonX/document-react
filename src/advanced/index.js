@@ -146,6 +146,54 @@ class OuterClickExample extends React.Component {
   } 
 }
 
+// 键盘设备
+class BlurExample extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isOpen: false
+    }
+
+    this.onClickHandler = this.onClickHandler.bind(this)
+    this.onBlurHandler = this.onBlurHandler.bind(this)
+    this.onFocusHandler = this.onFocusHandler.bind(this)
+  }
+
+  onClickHandler() {
+    this.setState((state) => ({
+      isOpen: !state.isOpen
+    }))
+  }
+
+  onBlurHandler() {
+    this.timeOutId = setTimeout(() => {
+      this.setState({
+        isOpen: false
+      })
+    })
+  }
+
+  onFocusHandler() {
+    clearTimeout(this.timeOutId)
+  }
+
+  render() {
+    return (<div onBlur={this.onBlurHandler} onFocus={this.onFocusHandler}>
+      <button onClick={this.onClickHandler}
+              aria-haspopup="true"
+              aria-expended={this.state.isOpen}
+      >
+        Select an option
+      </button>
+      {this.state.isOpen && <ul>
+        <li>李健</li>
+        <li>千玺</li>
+      </ul>}
+    </div>)
+  }
+}
+
 
 export default class Advanced extends React.Component {
 
@@ -174,6 +222,9 @@ export default class Advanced extends React.Component {
       <Parent />
       <div className="sub-title">鼠标和指针事件</div>
       <OuterClickExample />
+      <div className="des">键盘设备</div>
+      <BlurExample />
+
     </div>)
   }
 }
