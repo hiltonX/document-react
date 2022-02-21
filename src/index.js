@@ -1,25 +1,38 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+// 核心概念
 import Concept from './concept'
 
 import './index.css'
 
-let key = 'concept'
 
 const list = [
-  {title: '核心概念', key: 'concept'}
+  {title: '核心概念', key: 'concept'},
 ]
 
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      key: 'concept'
+    }
+  }
+
+  render() {
+    return (<div className="FBH">
+      <div className="w150">
+        {list.map(item => <p><a href="#" onClick={() => this.setState({key: item.key})}>{item.title}</a></p>)}
+      </div>
+      <div className="FB1">
+        {this.state.key === 'concept' && <Concept />}
+      </div>
+    </div>)
+  }
+}
+
 ReactDOM.render(
-  <div className="FBH">
-    <div className="w150">
-      {list.map(item => <a href="#" onClick={() => key = item.key}>{item.title}</a>)}
-    </div>
-    <div className="FB1">
-      {key === 'concept' && <Concept />}
-    </div>
-  </div>,
+  <App />,
   document.getElementById('root')
 )
 
