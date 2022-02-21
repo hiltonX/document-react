@@ -18,7 +18,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      key: 'concept'
+      key: 'advanced'
     }
   }
 

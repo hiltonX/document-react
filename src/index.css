@@ -14,4 +14,18 @@
 .w150 {
   width: 150px;
 }
-  
+
+.title {
+  weight: 900;
+  font-size: 20px
+}
+
+.sub-title {
+  weight: 900;
+  font-size: 16px
+}
+
+.des {
+  color: rgba(0,0,0,.65);
+  font-size: 14px;
+}
