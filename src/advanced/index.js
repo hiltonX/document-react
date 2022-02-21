@@ -97,6 +97,55 @@ class Parent extends React.Component {
   }
 }
 
+// 鼠标和指针事件
+class OuterClickExample extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.toggleContainer = React.createRef()
+
+    this.state = {
+      isOpen: false
+    }
+
+    this.onClickHandler = this.onClickHandler.bind(this)
+    this.onClickOutsiderHandler = this.onClickOutsiderHandler.bind(this)
+  }
+  
+  componentDidMount() {
+    window.addEventListener('click', this.onClickOutsiderHandler)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.onClickOutsiderHandler)
+  }
+
+
+  onClickHandler() {
+    this.setState((state) => ({
+      isOpen: !state.isOpen
+    }))
+  }
+
+  onClickOutsiderHandler(event) {
+    if (this.state.isOpen && !this.toggleContainer.current.contains(event.target)) {
+      this.setState({
+        isOpen: false
+      })
+    }
+  }
+
+  render() {
+    return (<div ref={this.toggleContainer}>
+      <button onClick={this.onClickHandler}>Select an option</button>
+      {this.state.isOpen && (<ul>
+        <li>李健</li>
+        <li>千玺</li>
+      </ul>)}
+    </div>)
+  } 
+}
+
 
 export default class Advanced extends React.Component {
 
@@ -123,6 +172,8 @@ export default class Advanced extends React.Component {
       <CustomTextInput />
       <div className="des">对父组件暴露DOM refs</div>
       <Parent />
+      <div className="sub-title">鼠标和指针事件</div>
+      <OuterClickExample />
     </div>)
   }
 }
