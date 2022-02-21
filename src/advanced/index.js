@@ -210,6 +210,17 @@ function MyComponent() {
   </div>)
 }
 
+const AnotherComponent = React.lazy(() => import('./another-component'))
+// 包裹多个组件
+function MultiMyComponent() {
+  return (<div>
+    <Suspense fallback={<div>loading</div>}>
+      <OtherComponent />
+      <AnotherComponent />
+    </Suspense>
+  </div>)
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -245,8 +256,8 @@ export default class Advanced extends React.Component {
       <div className="sub-title">React.lazy</div>
       <div className="des">代码会在首次渲染时自动导入包含OtherComponent组件的包</div>
       <MyComponent />
-
-
+      <div className="des">包裹多个懒加载组件</div>
+      <MultiMyComponent />
     </div>)
   }
 }
