@@ -1,4 +1,6 @@
 import React, {Fragment, Suspense} from 'react'
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+
 import ErrorBoundry from './error-boundry'
 
 const OtherComponent = React.lazy(() => import('./other-component'))
@@ -240,6 +242,18 @@ function CatchErrorBoundry(){
   </div>)
 }
 
+// 基于路由分割
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>loading.....</div>}>
+      <Routes>
+        <Route path="/other" component={OtherComponent} />
+        <Route path="/another" component={AnotherComponent} />
+      </Routes>
+    </Suspense>
+  </Router>
+)
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -279,6 +293,8 @@ export default class Advanced extends React.Component {
       <MultiMyComponent />
       <div className="sub-title">异常捕获边界</div>
       <CatchErrorBoundry />
+      <div className="sub-title">基于路由的代码分割</div>
+      <App />
     </div>)
   }
 }
