@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, Suspense} from 'react'
 
 // ========= 无障碍 =========
 // 标准和指南
@@ -199,6 +199,16 @@ import('./math').then(math => {
   console.log(math.add(1, 2))
 })
 
+// react.lazy
+const OtherComponent = React.lazy(() => import('./other-component'))
+
+function MyComponent() {
+  return (<div>
+    <Suspense fallback={<div style={{color: 'red'}}>loading....</div>}>
+      <OtherComponent />
+    </Suspense>
+  </div>)
+}
 
 export default class Advanced extends React.Component {
 
@@ -232,6 +242,9 @@ export default class Advanced extends React.Component {
       <div className="title">代码分割</div>
       <div className="sub-title">import()</div>
       <div className="des">代码分割的最佳方式是通过动态import()语法，CRA 开箱即用</div>
+      <div className="sub-title">React.lazy</div>
+      <div className="des">代码会在首次渲染时自动导入包含OtherComponent组件的包</div>
+      <MyComponent />
 
 
     </div>)
