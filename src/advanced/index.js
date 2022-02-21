@@ -231,7 +231,7 @@ export default class Advanced extends React.Component {
       <BlurExample />
       <div className="title">代码分割</div>
       <div className="sub-title">import()</div>
-      <div className="des">CRA 开箱即用</div>
+      <div className="des">代码分割的最佳方式是通过动态import()语法，CRA 开箱即用</div>
 
 
     </div>)
