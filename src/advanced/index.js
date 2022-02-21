@@ -50,6 +50,26 @@ function Sign() {
   </div>)
 }
 
+// 使用程序管理焦点
+class CustomTextInput extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.textInput = React.createRef()
+  }
+
+  componentDidMount() {
+    this.textInput.current.focus()
+  }
+
+  render() {
+    return (<input 
+      type="text"
+      ref={this.textInput}
+    />)
+  }
+}
+
 
 export default class Advanced extends React.Component {
 
@@ -59,9 +79,7 @@ export default class Advanced extends React.Component {
       <div className="sub-title">无障碍辅助功能</div>
       <div className="des">无障碍辅助功能是使得辅助技术正确解读网页的必要条件</div>
       <div className="sub-title">标准和指南</div>
-      <div className="content">
-        <Input />
-      </div>
+      <Input />
       <div className="sub-title">语义化的HTML</div>
       <div className="des">语义化的HTML是无障碍辅助功能网络应用的基础</div>
       <Glossary 
@@ -71,9 +89,11 @@ export default class Advanced extends React.Component {
       <ShortGlossary 
         items={[{id: 1, term: '首先', description: '李健'}, {id: 2, term: '其次', description: '千玺'}]}
       />
-      <div className="title">无障碍表单</div>
+      <div className="sub-title">无障碍表单</div>
       <div className="sub-title">标记</div>
       <Sign />
+      <div className="sub-title">使用程序管理焦点</div>
+      <CustomTextInput />
     </div>)
   }
 }
