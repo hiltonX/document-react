@@ -303,6 +303,10 @@ export default class Advanced extends React.Component {
       <Suspense fallback={<div>loading....</div>}>
         <MyRenameComponent />
       </Suspense>
+      <div className="title">Context</div>
+      <div className="des">Context提供了一种在组件之间共享此类值的方式，而不必显式的通过组件树的逐层传递props</div>
+
+
     </div>)
   }
 }
