@@ -334,6 +334,34 @@ function ComponentUser(props) {
   return (props.user)
 }
 
+// 多个组件
+function SlotPage(props) {
+  const { user } = props
+  const content = <Feed user={user}/>
+  const topBar = (<SlotNavigationBar>
+    <div>用户名：{props.user.name};avatarSize:{props.avatarSize}</div>
+  </SlotNavigationBar>)
+
+  return (<SlotPageLayout 
+    topBar={topBar}
+    content={content}
+  />)
+}
+
+function Feed(props) {
+  return (<div>{props.user.name}是首帅</div>)
+}
+
+function SlotNavigationBar(props) {
+  return (<div>用户信息：{props.children}</div>)
+}
+
+function SlotPageLayout(props) {
+  return (<div>
+    <div>topBar: {props.topBar}</div>
+    <div>content: {props.content}</div>
+  </div>)
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -393,6 +421,9 @@ export default class Advanced extends React.Component {
       <DeepPage user={{name: '李健',}} avatarSize="60"/>
       <div className="sub-title">传递组件自身</div>
       <ComponentPage user={{name: '千玺'}} avatarSize="100"/>
+      <div className="sub-title">多个组件</div>
+      <SlotPage user={{name: '李健'}} avatarSize="200"/>
+      
     </div>)
   }
 }
