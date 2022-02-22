@@ -421,6 +421,14 @@ class RenderMyClass extends React.Component {
     return (<div>class.contextType, value: {this.context}</div>)
   }
 }
+
+// context.consumer
+function ConsumerClass(props) {
+
+  return (<MyContext.Consumer value="b">
+    {value => (<div>context.consumer, value: {value}</div>)}
+  </MyContext.Consumer>)
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -487,6 +495,13 @@ export default class Advanced extends React.Component {
       <ProviderValue />
       <MyClass />
       <RenderMyClass />
+      <ConsumerClass />
+      <div className="des">
+        <div>Context.displayName</div>
+        <div>const context = react.createContext('displayName')</div>
+        <div>context.displayName = 'aaa'</div>
+      </div>
+
     </div>)
   }
 }
