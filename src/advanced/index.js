@@ -298,6 +298,23 @@ class ContextThemeButton extends React.Component {
   }
 }
 
+// 深度嵌套
+function DeepPage(props) {
+  return (<DeepPageLayout user={props.user} avatarSize={props.avatarSize} />)
+}
+
+function DeepPageLayout(props) {
+  return (<DeepNavigationBar user={props.user} avatarSize={props.avatarSize}/>)
+}
+
+function DeepNavigationBar(props) {
+  return (<DeepUser user={props.user} avatarSize={props.avatarSize}/>)
+}
+
+function DeepUser(props) {
+  return (<div>用户名：{props.user.name}；avatarSize: {props.avatarSize}</div>)
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -351,7 +368,10 @@ export default class Advanced extends React.Component {
       <TranditionalProps />
       <div className="sub-title">Context传递Props</div>
       <ContextProps />
-
+      <div className="sub-title">使用Context之前的考虑</div>
+      <div className="des">会使组件的复用性变大</div>
+      <div className="sub-title">深度嵌套</div>
+      <DeepPage user={{name: '李健',}} avatarSize="60"/>
     </div>)
   }
 }
