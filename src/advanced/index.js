@@ -315,6 +315,25 @@ function DeepUser(props) {
   return (<div>用户名：{props.user.name}；avatarSize: {props.avatarSize}</div>)
 }
 
+// 传递组件自身
+function ComponentPage(props) {
+  const ComponentUser = (<div>用户名：{props.user.name};avatarSize: {props.avatarSize}</div>)
+
+  return (<ComponentPageLayout user={ComponentUser}/>)
+}
+
+function ComponentPageLayout(props) {
+  return (<ComponentNavigationBar user={props.user}/>)
+}
+
+function ComponentNavigationBar(props) {
+  return (<ComponentUser user={props.user}/>)
+}
+
+function ComponentUser(props) {
+  return (props.user)
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -372,6 +391,8 @@ export default class Advanced extends React.Component {
       <div className="des">会使组件的复用性变大</div>
       <div className="sub-title">深度嵌套</div>
       <DeepPage user={{name: '李健',}} avatarSize="60"/>
+      <div className="sub-title">传递组件自身</div>
+      <ComponentPage user={{name: '千玺'}} avatarSize="100"/>
     </div>)
   }
 }
