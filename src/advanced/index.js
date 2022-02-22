@@ -362,6 +362,19 @@ function SlotPageLayout(props) {
     <div>content: {props.content}</div>
   </div>)
 }
+
+// API
+const DefaultContext = React.createContext('defaultvalue')
+
+class DefaultValue extends React.Component {
+  static contextType = DefaultContext
+
+  render() {
+    return (<div id={this.context}>React.createContext</div>)
+  }
+}
+
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -423,7 +436,8 @@ export default class Advanced extends React.Component {
       <ComponentPage user={{name: '千玺'}} avatarSize="100"/>
       <div className="sub-title">多个组件</div>
       <SlotPage user={{name: '李健'}} avatarSize="200"/>
-      
+      <div className="sub-title">API</div>
+      <DefaultValue />
     </div>)
   }
 }
