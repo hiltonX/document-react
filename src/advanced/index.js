@@ -384,7 +384,43 @@ class ProviderValue extends React.Component {
   }
 }
 
+// class.contextType
+const MyContext = React.createContext('李健')
 
+class MyClass extends React.Component {
+  componentDidMount() {
+    let value = this.context
+
+    console.log(value + '--componentDidMount')
+  }
+
+  componentDidUpdate() {
+    let value = this.context
+
+    console.log(value + '--componentDidUpdate')
+  }
+
+  componentWillUnmount() {
+    let value = this.context
+
+    console.log(value + '--componentWillUnmount')
+  }
+
+  render() {
+    let value = this.context
+    return (<div>class.contextType, value: {value}</div>)
+  }
+}
+
+MyClass.contextType = MyContext
+
+class RenderMyClass extends React.Component {
+  static contextType = MyContext
+
+  render() {
+    return (<div>class.contextType, value: {this.context}</div>)
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -449,6 +485,8 @@ export default class Advanced extends React.Component {
       <div className="sub-title">API</div>
       <DefaultValue />
       <ProviderValue />
+      <MyClass />
+      <RenderMyClass />
     </div>)
   }
 }
