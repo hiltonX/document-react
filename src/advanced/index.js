@@ -257,6 +257,46 @@ const App = () => (
 // 命名导出
 const MyRenameComponent = React.lazy(() => import('./myRename-component'))
 
+// 何时使用Context
+// 传统传递Props
+class TranditionalProps extends React.Component {
+  render() {
+    return (<ToolBar theme="dark"/>)
+  }
+}
+
+function ToolBar(props) {
+  return (<ThemeButton theme={props.theme}/>)
+}
+
+class ThemeButton extends React.Component {
+  render() {
+    return (<button theme={this.props.theme}>传统传递Props</button>)
+  }
+}
+
+// 使用context
+const ThemeContext = React.createContext('light')
+
+class ContextProps extends React.Component {
+  render() {
+    return (<ThemeContext.Provider value="dark" test="test">
+      <ContextToolBar />
+    </ThemeContext.Provider>)
+  }
+}
+
+function ContextToolBar() {
+  return (<ContextThemeButton />)
+}
+
+class ContextThemeButton extends React.Component {
+  static contextType = ThemeContext
+
+  render() {
+    return (<button theme={this.context}>context传递props</button>)
+  }
+}
 
 export default class Advanced extends React.Component {
 
@@ -305,7 +345,12 @@ export default class Advanced extends React.Component {
       </Suspense>
       <div className="title">Context</div>
       <div className="des">Context提供了一种在组件之间共享此类值的方式，而不必显式的通过组件树的逐层传递props</div>
-
+      <h3>何时使用Context</h3>
+      <div className="des">Context设计的目的是为了共享那些对于一个组件库而言是全局的数据。例如当前认证的用户</div>
+      <div className="sub-title">传统传递Props</div>
+      <TranditionalProps />
+      <div className="sub-title">Context传递Props</div>
+      <ContextProps />
 
     </div>)
   }
