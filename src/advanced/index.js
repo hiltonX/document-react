@@ -719,6 +719,12 @@ export default class Advanced extends React.Component {
       <div className="sub-title">关于事件处理器</div>
       <div className="des">如果需要在事件处理器内部捕获错误，使用普通的javascript try/catch 语句</div>
       <TryCatchComponent />
+      <div className="sub-title">自React15的命名更改</div>
+      <div className="des">React15中有unstable_handleError方法支持错误边界，自从react 16beta发布需要修改为componentDidcatch。</div>
+      <div className="des"><a href="https://github.com/reactjs/react-codemod#error-boundaries">codemod</a>帮助自动迁移代码，</div>
+
+      
+      
     </div>)
   }
 }
