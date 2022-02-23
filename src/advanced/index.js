@@ -684,6 +684,9 @@ export default class Advanced extends React.Component {
       <div className="des">3.服务端渲染</div>
       <div className="des">4.自身抛出的错误</div>
       <ErrorApp />
+      <div className="sub-title">关于try/catch</div>
+      <div className="des">trt{'{}'}catch(e) {'{}'}，仅能用于命令式代码</div>
+      <div className="des">react组件是声明式的, {'<Button />'}</div>
 
     </div>)
   }
