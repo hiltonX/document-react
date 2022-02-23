@@ -5,6 +5,10 @@ import ErrorBoundry from './error-boundry'
 import ThemedButton from './themed-button'
 import {themes, DynamicThemeContext} from './theme-context'
 
+import {nestThemes, NestThemesContext} from './nest-theme-context'
+import NestThemedButton from './nest-themed-button'
+
+
 const OtherComponent = React.lazy(() => import('./other-component'))
 const AnotherComponent = React.lazy(() => import('./another-component'))
 
@@ -458,8 +462,6 @@ class DynamicTheme extends React.Component {
   }
 
   render() {
-      console.log(this.state.theme, 'theme....')
-
     return (<div>
       <DynamicThemeContext.Provider value={this.state.theme}>
          <DynamicToolBar 
@@ -470,6 +472,30 @@ class DynamicTheme extends React.Component {
         <ThemedButton />
       </section>
     </div>)
+  }
+}
+
+// 在嵌套组件中更新context
+class NestApp extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.toggleThemes = () => {
+      this.setState((state) => ({
+        theme: state.theme === nestThemes.red ? nestThemes.white : nestThemes.red
+      }))
+    }
+
+    this.state = {
+      theme: 'white',
+      toggleThemes: this.toggleThemes
+    }
+  }
+
+  render() {
+    return (<NestThemesContext.Provider value={this.state}>
+      <NestThemedButton>在嵌套组件中更新context</NestThemedButton>
+    </NestThemesContext.Provider>)
   }
 }
 
@@ -547,6 +573,8 @@ export default class Advanced extends React.Component {
       </div>
       <div className="sub-title">动态Context</div>
       <DynamicTheme />
+      <div className="sub-title">在嵌套组件中更新context</div>
+      <NestApp />
     </div>)
   }
 }
