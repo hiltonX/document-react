@@ -8,6 +8,7 @@ import {themes, DynamicThemeContext} from './theme-context'
 import {nestThemes, NestThemesContext} from './nest-theme-context'
 import NestThemedButton from './nest-themed-button'
 
+import ErrorBoundary from './error-boundary'
 
 const OtherComponent = React.lazy(() => import('./other-component'))
 const AnotherComponent = React.lazy(() => import('./another-component'))
@@ -573,6 +574,27 @@ class StateApp extends React.Component {
   }
 }
 
+// 错误边界
+
+function ErrorApp() {
+  return(<ErrorBoundary>
+    <MyWidget />
+  </ErrorBoundary>)
+}
+
+class MyWidget extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      a: 1
+    }
+    alert(this.stat.a)
+  }
+  render() {
+    return (<div>myWidget</div>)
+  }
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -654,6 +676,14 @@ export default class Advanced extends React.Component {
       <div className="sub-title">注意事项</div>
       <RenderApp />
       <StateApp />
+      <div className="title">错误边界</div>
+      <div className="sub-title">错误边界</div>
+      <div className="des">注意：错误边界无法捕捉以下几种场景中的错误</div>
+      <div className="des">1.事件处理</div>
+      <div className="des">2.定时器等异步函数</div>
+      <div className="des">3.服务端渲染</div>
+      <div className="des">4.自身抛出的错误</div>
+      <ErrorApp />
 
     </div>)
   }
