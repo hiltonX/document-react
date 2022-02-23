@@ -499,6 +499,45 @@ class NestApp extends React.Component {
   }
 }
 
+// 消费多个context
+const SidebarContext = React.createContext('sidebar-context')
+const ContentContext = React.createContext({
+  message: 'content-context',
+})
+
+class MuchContextComponent extends React.Component {
+  render() {
+    const {userName, message} = this.props
+
+    return (<SidebarContext.Provider value={userName}>
+      <ContentContext.Provider value={message}>
+        <MuchContextPageLayout />
+      </ContentContext.Provider>
+    </SidebarContext.Provider>)
+  }
+}
+
+
+function MuchContextPageLayout() {
+  return (
+    <div>
+      <div>消费多个context</div>
+      <MuchContent />
+    </div>
+  )
+}
+
+function MuchContent() {
+  return (<SidebarContext.Consumer>{
+    (userName) => (<ContentContext.Consumer>{
+      (message) => (
+        <div>sidebar: {userName}; content: {message}</div>
+      )
+    }</ContentContext.Consumer>
+    )
+  }</SidebarContext.Consumer>)
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -575,6 +614,8 @@ export default class Advanced extends React.Component {
       <DynamicTheme />
       <div className="sub-title">在嵌套组件中更新context</div>
       <NestApp />
+      <div className="sub-title">消费多个context</div>
+      <MuchContextComponent userName="李健" message="很帅"/>
     </div>)
   }
 }
