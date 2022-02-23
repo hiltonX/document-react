@@ -594,6 +594,35 @@ class MyWidget extends React.Component {
     return (<div>myWidget</div>)
   }
 }
+// 关于事件处理器
+class TryCatchComponent extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {error: null}
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    
+    try{
+      alert(this.stat.a)
+      console.log('try')
+    } catch(error) {
+      this.setState({
+        error
+      })
+    }
+  }
+
+  render() {
+    if(this.state.error) {
+      return <div>事件错误</div>
+    }
+
+    return (<button onClick={this.handleClick}>关于事件处理器</button>)
+  }
+}
 
 export default class Advanced extends React.Component {
 
@@ -687,7 +716,9 @@ export default class Advanced extends React.Component {
       <div className="sub-title">关于try/catch</div>
       <div className="des">trt{'{}'}catch(e) {'{}'}，仅能用于命令式代码</div>
       <div className="des">react组件是声明式的, {'<Button />'}</div>
-
+      <div className="sub-title">关于事件处理器</div>
+      <div className="des">如果需要在事件处理器内部捕获错误，使用普通的javascript try/catch 语句</div>
+      <TryCatchComponent />
     </div>)
   }
 }
