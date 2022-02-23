@@ -2,6 +2,8 @@ import React, {Fragment, Suspense} from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import ErrorBoundry from './error-boundry'
+import ThemedButton from './themed-button'
+import {themes, DynamicThemeContext} from './theme-context'
 
 const OtherComponent = React.lazy(() => import('./other-component'))
 const AnotherComponent = React.lazy(() => import('./another-component'))
@@ -429,6 +431,48 @@ function ConsumerClass(props) {
     {value => (<div>context.consumer, value: {value}</div>)}
   </MyContext.Consumer>)
 }
+
+
+// 动态context
+function DynamicToolBar(props) {
+  return(<ThemedButton onClick={props.changeThemes}>
+    ChangeTheme
+  </ThemedButton>)
+}
+
+
+
+class DynamicTheme extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      theme: themes.light
+    }
+
+    this.toggleThemes = () => {
+      this.setState(state =>({
+        theme: state.theme === themes.dark ? themes.light : themes.dark
+      }))
+    }
+  }
+
+  render() {
+      console.log(this.state.theme, 'theme....')
+
+    return (<div>
+      <DynamicThemeContext.Provider value={this.state.theme}>
+         <DynamicToolBar 
+            changeThemes={this.toggleThemes}
+         />
+      </DynamicThemeContext.Provider>
+      <section>
+        <ThemedButton />
+      </section>
+    </div>)
+  }
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -501,7 +545,8 @@ export default class Advanced extends React.Component {
         <div>const context = react.createContext('displayName')</div>
         <div>context.displayName = 'aaa'</div>
       </div>
-
+      <div className="sub-title">动态Context</div>
+      <DynamicTheme />
     </div>)
   }
 }
