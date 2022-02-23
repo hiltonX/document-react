@@ -538,6 +538,41 @@ function MuchContent() {
   }</SidebarContext.Consumer>)
 }
 
+// 注意事项
+const TipContext = React.createContext({
+  something: 'default'
+})
+
+function ConsumerToolBar() {
+  return (<TipContext.Consumer>
+  {({something}) => (<div>注意事项：{something}</div>)}
+  </TipContext.Consumer>)
+}
+// 多次渲染
+class RenderApp extends React.Component {
+  render() {
+    return (<TipContext.Provider value={{something: 'something'}}>
+      <ConsumerToolBar />
+    </TipContext.Provider>)
+  }
+}
+
+class StateApp extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      something: 'something'
+    }
+  }
+
+  render() {
+    return (<TipContext.Provider value={this.state}>
+      <ConsumerToolBar />
+    </TipContext.Provider>)
+  }
+}
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -616,6 +651,10 @@ export default class Advanced extends React.Component {
       <NestApp />
       <div className="sub-title">消费多个context</div>
       <MuchContextComponent userName="李健" message="很帅"/>
+      <div className="sub-title">注意事项</div>
+      <RenderApp />
+      <StateApp />
+
     </div>)
   }
 }
