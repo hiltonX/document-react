@@ -817,6 +817,25 @@ class FragmentColumns extends React.Component {
     </React.Fragment>)
   }
 }
+
+// 短语法
+class ShortTable extends React.Component {
+  render() {
+    return (<table>
+      <tr>
+        <ShortFragment />
+      </tr>
+    </table>)
+  }
+}
+class ShortFragment extends React.Component {
+  render() {
+    return (<>
+      <td>hello</td>
+      <td>world</td>
+    </>)
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -954,6 +973,8 @@ export default class Advanced extends React.Component {
       <Table />
       <div className="sub-title">用法</div>
       <FragmentTable />
+      <div className="sub-title">短语法</div>
+      <ShortTable />
     </div>)
   }
 }
