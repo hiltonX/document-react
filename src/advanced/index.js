@@ -850,6 +850,149 @@ class KeyFragment extends React.Component {
     </dl>)
   }
 }
+
+// 传统组件业务需求
+const DataSource = {
+  getComments: () => {
+    return [{
+      name: '李健',
+      id: 1
+    }, {
+      name: '千玺',
+      id: 2
+    }]
+  },
+  addChangeListener: (cb) => {
+    console.log('addChangeListener')
+    cb && cb()
+  },
+  removeChangeListener: (cb) => {
+    console.log('removeChangeListener')
+    cb && cb()
+  },
+  getBlogPost: (id) => {
+    const item = [{
+      name: '李健',
+      id: 1
+    }, {
+      name: '千玺',
+      id: 2
+    }].filter(item => item.id === id)[0] || {}
+
+    return item.name
+  }
+}
+
+function Comment(props) {
+  return (<div>{props.comment.name}</div>)
+}
+
+function TextBlock(props) {
+  return (<div>{props.text}</div>)
+}
+class CommentList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      comments: DataSource.getComments()
+    }
+  }
+
+  componentDidMount() {
+    // 订阅更改
+    DataSource.addChangeListener(this.handleChange)
+  }
+
+  componentWillUnnmount() {
+    // 清除订阅
+    DataSource.removeChangeListener(this.handleChange)
+  }
+
+  handleChange() {
+    // 当数据源更新时，更新组件状态
+    this.setState({
+      comments: DataSource.getComments()
+    })
+  }
+
+  render() {
+    return (<div>
+      {this.state.comments.map((comment) => (
+        <Comment comment={comment} key={comment.id} />
+      ))}
+    </div>)
+  }
+}
+
+class BlogPost extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+
+    this.state = {
+      blogPost: DataSource.getBlogPost(props.id)
+    }
+  }
+
+  componentDidMount() {
+    DataSource.addChangeListener(this.handleChange)
+  }
+
+  componentWillUnmount() {
+    DataSource.removeChangeListener(this.handleChange)
+  }
+
+  handleChange() {
+    this.setState({
+      blogPost: DataSource.getBlogPost(this.props.id)
+    })
+  }
+
+  render() {
+    return (<TextBlock text={this.state.blogPost} />)
+  }
+}
+
+// HOC
+function withSubscription(WrappedComponent, selectData) {
+  // 返回一个组件
+  return class extends React.Component {
+    constructor(props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this)
+
+      this.state = {
+        data: selectData(DataSource, props)
+      }
+    } 
+
+    componentDidMount() {
+      // 负责订阅相关操作
+      DataSource.addChangeListener(this.handleChange)
+    }
+
+    componentWillUnmount() {
+      DataSource.removeChangeListener(this.handleChange)
+    }
+
+    handleChange() {
+      this.setState({
+        data: selectData(DataSource, this.props)
+      })
+    }
+
+    render() {
+      // 使用新数据渲染被包装的组件
+      // 可能还会传递其他属性
+
+      return (<WrappedComponent data={this.state.data} {...this.props}/>)
+    }
+  }
+}
+
+const CommentListWithSubscription = withSubscription(CommentList, (DataSource) => DataSource.getComments())
+const BlogPostWithSubscription = withSubscription(BlogPost, (DataSource, props) => DataSource.getBlogPost(props.id))
 export default class Advanced extends React.Component {
 
   render() {
@@ -1007,6 +1150,13 @@ export default class Advanced extends React.Component {
       <div className="des">
         const EnhancedComponent = higherOrderComponent(WrappedCompinent)
       </div>
+      <div className="sub-title">使用HOC解决横切关注点问题</div>
+      <div className="des">传统相似组件</div>
+      <CommentList />
+      <BlogPost id={1}/>
+      <div className="des">HOC</div>
+      <CommentListWithSubscription />
+      <BlogPostWithSubscription id={1}/>
     </div>)
   }
 }
