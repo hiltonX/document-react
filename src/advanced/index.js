@@ -696,6 +696,67 @@ function forwardLogProps(Component) {
 
 const NewForwardFancyButton = forwardLogProps(PropsFancyButton)
 
+// 在DevTools中显示自定义名称
+function oneName(Component) {
+  class LogProps extends React.Component {
+    render() {
+      const {forwardRef, ...rest} = this.props
+
+      return <Component ref={forwardRef} {...rest}/>
+    }
+  }
+
+  const WrappedComponent = React.forwardRef((props, ref) => {
+    return <LogProps {...props} forwardRef={ref} />
+  })
+
+  return WrappedComponent 
+}
+
+const OneRename = oneName(PropsFancyButton)
+
+// 命名渲染函数
+function twoName(Component) {
+  class LogProps extends React.Component {
+    render() {
+      const {forwardedRef, ...rest} = this.props
+
+      return (<Component ref={forwardedRef} {...rest}/>)
+    }
+  }
+
+  const WrappedComponent = React.forwardRef(
+    function myFunction(props, ref) {
+      return <LogProps {...props} forwardedRef={ref}/>
+    }
+  )
+
+  return WrappedComponent
+}
+
+const TwoRename = twoName(PropsFancyButton)
+
+// 设置函数displayName
+function threeName(Component) {
+  class LogProps extends React.Component {
+
+    render() {
+      const {forwardedRef, ...rest} = this.props
+
+      return (<Component ref={forwardedRef} {...rest}/>)
+    }
+  }
+
+  function forwardRef(props, ref) {
+    return (<LogProps {...props} forwardedRef={ref} />)
+  }
+
+  forwardRef.displayName = 'displayName'
+
+  return React.forwardRef(forwardRef)
+}
+
+const ThreeRename = threeName(PropsFancyButton)
 export default class Advanced extends React.Component {
 
   render() {
@@ -815,6 +876,16 @@ export default class Advanced extends React.Component {
       >
         转发refs到内部组件
       </NewForwardFancyButton>
+      <div className="sub-title">在DevTools中显示自定义名称</div>
+      <OneRename>
+        第一种重命名:ForwardedRef
+      </OneRename>
+      <TwoRename>
+        第二种重命名：命名渲染函数
+      </TwoRename>
+      <ThreeRename>
+        第三种重命名：displayName
+      </ThreeRename>
     </div>)
   }
 }
