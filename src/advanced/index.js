@@ -674,6 +674,25 @@ class PropsFancyButton extends React.Component {
 
 logProps(<PropsFancyButton>HOC</PropsFancyButton>)
 
+// 转发refs到内部组件
+function forwardLogProps(Component) {
+  class LogProps extends React.Component {
+    componentDidUpdate(prevProps) {
+      console.log('old props', prevProps)
+      console.log('new props', this.props)
+    }
+
+    render() {
+      const {forwardRef, ...rest} = this.props
+      
+      return (<Component ref={forwardRef} {...rest} />)
+    }
+  }
+
+  return React.forwardRef((props, ref) => {
+    return (<LogProps {...props} forwardedRef={ref} />)
+  })
+}
 
 export default class Advanced extends React.Component {
 
