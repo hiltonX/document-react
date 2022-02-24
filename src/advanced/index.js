@@ -778,6 +778,44 @@ function FragmentCompnent() {
     <ChildC />
   </React.Fragment>)
 }
+// 动机
+class Table extends React.Component {
+  render() {
+    return (<table>
+      <tr>
+        <Columns />
+      </tr>
+    </table>)
+  }
+}
+
+class Columns extends React.Component {
+  render() {
+    return (<div>
+      <td>hello</td>
+      <td>world</td>
+    </div>)
+  }
+}
+
+class FragmentTable extends React.Component {
+  render() {
+    return (<table>
+      <tr>
+        <FragmentColumns />
+      </tr>
+    </table>)
+  }
+}
+
+class FragmentColumns extends React.Component {
+  render() {
+    return (<React.Fragment>
+      <td>hello</td>
+      <td>world</td>
+    </React.Fragment>)
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -910,6 +948,10 @@ export default class Advanced extends React.Component {
       <div className="title">Fragments</div>
       <div className="des">Fragments允许将子列表分组，而无需向DOM添加额外节点</div>
       <FragmentCompnent />
+      <div className="sub-title">动机</div>
+      <div className="des">组件返回一个子元素列表</div>
+      <Table />
+      <FragmentTable />
     </div>)
   }
 }
