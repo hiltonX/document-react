@@ -1002,6 +1002,11 @@ export default class Advanced extends React.Component {
           id: '456'
         }]}
       />
+      <div className="title">高阶组件</div>
+      <div className="des">高阶组件的参数是组件，返回值为新组件的函数</div>
+      <div className="des">
+        const EnhancedComponent = higherOrderComponent(WrappedCompinent)
+      </div>
     </div>)
   }
 }
