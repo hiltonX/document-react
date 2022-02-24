@@ -798,6 +798,7 @@ class Columns extends React.Component {
   }
 }
 
+// 用法
 class FragmentTable extends React.Component {
   render() {
     return (<table>
@@ -951,6 +952,7 @@ export default class Advanced extends React.Component {
       <div className="sub-title">动机</div>
       <div className="des">组件返回一个子元素列表</div>
       <Table />
+      <div className="sub-title">用法</div>
       <FragmentTable />
     </div>)
   }
