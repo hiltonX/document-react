@@ -624,6 +624,26 @@ class TryCatchComponent extends React.Component {
   }
 }
 
+// =========== refs 转发 ============
+// 渲染原生button
+function FancyButton(props) {
+  return (<button className="FancyButton">
+    {props.children}
+  </button>)
+}
+// 改造，转发refs到DOM组件
+const RefsFancyButton = React.forwardRef((props, ref) => (
+  <button 
+    ref={ref} className="FancyButton"
+    onClick={() => {
+      console.log(ref)
+    }}
+  >
+    {props.children}
+  </button>
+))
+
+const ref = React.createRef()
 export default class Advanced extends React.Component {
 
   render() {
@@ -722,9 +742,10 @@ export default class Advanced extends React.Component {
       <div className="sub-title">自React15的命名更改</div>
       <div className="des">React15中有unstable_handleError方法支持错误边界，自从react 16beta发布需要修改为componentDidcatch。</div>
       <div className="des"><a href="https://github.com/reactjs/react-codemod#error-boundaries">codemod</a>帮助自动迁移代码，</div>
-
-      
-      
+      <div className="title">refs转发</div>
+      <div className="sub-title">转发refs到DOM组件</div>
+      <FancyButton>渲染原生DOM元素的组件</FancyButton>
+      <RefsFancyButton ref={ref}>转发ref</RefsFancyButton>
     </div>)
   }
 }
