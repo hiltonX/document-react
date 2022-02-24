@@ -836,6 +836,20 @@ class ShortFragment extends React.Component {
     </>)
   }
 }
+
+// 带key的Fragments
+class KeyFragment extends React.Component {
+  render() {
+    return (<dl>
+      {this.props.items.map(item => (
+        <React.Fragment key={item.id}>
+          <dt>{item.term}</dt>
+          <dd>{item.description}</dd>
+        </React.Fragment>
+      ))}
+    </dl>)
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -975,6 +989,19 @@ export default class Advanced extends React.Component {
       <FragmentTable />
       <div className="sub-title">短语法</div>
       <ShortTable />
+      <div className="sub-title">带key的Fragments</div>
+      <div className="des">key是唯一可以传递给Fragment的属性，传递参数时不能使用短语法</div>
+      <KeyFragment 
+        items={[{
+          term: '李健',
+          description: '很帅',
+          id: '123'
+        }, {
+          term: '李健',
+          description: '很帅帅',
+          id: '456'
+        }]}
+      />
     </div>)
   }
 }
