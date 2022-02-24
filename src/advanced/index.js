@@ -993,6 +993,38 @@ function withSubscription(WrappedComponent, selectData) {
 
 const CommentListWithSubscription = withSubscription(CommentList, (DataSource) => DataSource.getComments())
 const BlogPostWithSubscription = withSubscription(BlogPost, (DataSource, props) => DataSource.getBlogPost(props.id))
+
+// 不要改变原始组件。使用组合。
+// 不要试图在HOC中修改组件原型
+function hocLogProps(InputComponent) {
+  InputComponent.prototype.componentDidUpdate = function(prevProps) {
+    console.log('Current props: ', this.props)
+    console.log('Previous props: ', prevProps)
+  }
+
+  return InputComponent
+}
+function InputComponent() {
+  return (<input />)
+}
+const EnhanceHocLogProps = hocLogProps(InputComponent)
+// 使用组合的形式
+function hocGroupLogProps(InputComponent) {
+  return class extends React.Component {
+    componentDidUpdate(prevProps) {
+      console.log('Current props:', this.props)
+      console.log('Previous props:', prevProps)
+    }
+
+    render() {
+      return (<InputComponent {...this.props}/>)
+    }
+  }
+}
+
+const HocGroupLogProps = hocGroupLogProps(InputComponent)
+
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -1157,6 +1189,9 @@ export default class Advanced extends React.Component {
       <div className="des">HOC</div>
       <CommentListWithSubscription />
       <BlogPostWithSubscription id={1}/>
+      <div className="sub-title">不要使用原始组件。使用组合</div>
+      <EnhanceHocLogProps name="1"/>
+      <HocGroupLogProps />
     </div>)
   }
 }
