@@ -757,6 +757,27 @@ function threeName(Component) {
 }
 
 const ThreeRename = threeName(PropsFancyButton)
+
+// ====== Fragments ========
+function ChildA() {
+  return (<div>childA</div>)
+}
+
+function ChildB() {
+  return (<div>childB</div>)
+}
+
+function ChildC() {
+  return (<div>childC</div>)
+}
+
+function FragmentCompnent() {
+  return (<React.Fragment>
+    <ChildA />
+    <ChildB />
+    <ChildC />
+  </React.Fragment>)
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -886,6 +907,9 @@ export default class Advanced extends React.Component {
       <ThreeRename>
         第三种重命名：displayName
       </ThreeRename>
+      <div className="title">Fragments</div>
+      <div className="des">Fragments允许将子列表分组，而无需向DOM添加额外节点</div>
+      <FragmentCompnent />
     </div>)
   }
 }
