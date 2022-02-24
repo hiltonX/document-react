@@ -672,7 +672,7 @@ class PropsFancyButton extends React.Component {
   }
 }
 
-logProps(<PropsFancyButton>HOC</PropsFancyButton>)
+const NewPropsFancyButton = logProps(PropsFancyButton)
 
 // 转发refs到内部组件
 function forwardLogProps(Component) {
@@ -798,13 +798,13 @@ export default class Advanced extends React.Component {
       <RefsFancyButton ref={ref}>转发ref</RefsFancyButton>
       <div className="sub-title">在高阶组件中转发refs</div>
       <div className="des">这个技巧对高阶组件（HOC）特别有用</div>
-      <PropsFancyButton 
+      <NewPropsFancyButton 
         label="click me"
         ref={ref}
         onClick={() => console.log(ref)}
       >
         在高阶组件中转发refs
-      </PropsFancyButton>
+      </NewPropsFancyButton>
     </div>)
   }
 }
