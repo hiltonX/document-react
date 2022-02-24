@@ -684,7 +684,7 @@ function forwardLogProps(Component) {
 
     render() {
       const {forwardRef, ...rest} = this.props
-      
+      console.log(rest , 'rest')
       return (<Component ref={forwardRef} {...rest} />)
     }
   }
@@ -693,6 +693,8 @@ function forwardLogProps(Component) {
     return (<LogProps {...props} forwardedRef={ref} />)
   })
 }
+
+const NewForwardFancyButton = forwardLogProps(PropsFancyButton)
 
 export default class Advanced extends React.Component {
 
@@ -805,6 +807,14 @@ export default class Advanced extends React.Component {
       >
         在高阶组件中转发refs
       </NewPropsFancyButton>
+      <NewForwardFancyButton
+        ref={ref}
+        onClick={() => {
+          console.log(ref, 'ref')
+        }}
+      >
+        转发refs到内部组件
+      </NewForwardFancyButton>
     </div>)
   }
 }
