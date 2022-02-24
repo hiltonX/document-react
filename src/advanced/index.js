@@ -644,6 +644,37 @@ const RefsFancyButton = React.forwardRef((props, ref) => (
 ))
 
 const ref = React.createRef()
+
+// 在高阶组件中转发refs
+function logProps(WrappedComponent) {
+  class LogProps extends React.Component {
+    componentDidUpdate(preProps) {
+      console.log('old props', preProps)
+      console.log('new props', this.props)
+    }
+
+    render() {
+      return (<WrappedComponent {...this.props}/>)
+    }
+  }
+
+  return LogProps
+}
+
+
+class PropsFancyButton extends React.Component {
+  foucs() {
+    console.log('focus')
+  }
+
+  render() {
+    return (<button {...this.props}></button>)
+  }
+}
+
+logProps(<PropsFancyButton>HOC</PropsFancyButton>)
+
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -746,6 +777,15 @@ export default class Advanced extends React.Component {
       <div className="sub-title">转发refs到DOM组件</div>
       <FancyButton>渲染原生DOM元素的组件</FancyButton>
       <RefsFancyButton ref={ref}>转发ref</RefsFancyButton>
+      <div className="sub-title">在高阶组件中转发refs</div>
+      <div className="des">这个技巧对高阶组件（HOC）特别有用</div>
+      <PropsFancyButton 
+        label="click me"
+        ref={ref}
+        onClick={() => console.log(ref)}
+      >
+        在高阶组件中转发refs
+      </PropsFancyButton>
     </div>)
   }
 }
