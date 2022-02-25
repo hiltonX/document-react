@@ -1024,6 +1024,26 @@ function hocGroupLogProps(InputComponent) {
 
 const HocGroupLogProps = hocGroupLogProps(InputComponent)
 
+// 约定：将不相关的props传递给被包裹的组件
+function propsComponent(WrappendComponent) {
+  return class extends React.Component {
+    render() {
+      // 过滤掉非此HOC额外的props，且不需要进行透传
+      const { extraProp, someStateOrInstanceMethod, ...passThroughProps } = this.props
+      // 通常为state的值或实例方法 
+      const injectedProp = someStateOrInstanceMethod
+
+      return (
+        <WrappendComponent 
+          injectedProp={injectedProp}
+          {...passThroughProps}
+        />
+      )
+    }
+  }
+}
+
+const PropsComponent = propsComponent(InputComponent)
 
 export default class Advanced extends React.Component {
 
@@ -1192,6 +1212,11 @@ export default class Advanced extends React.Component {
       <div className="sub-title">不要使用原始组件。使用组合</div>
       <EnhanceHocLogProps name="1"/>
       <HocGroupLogProps />
+      <div className="sub-title">约定：将不相关的props传递给被包裹的组件</div>
+      <PropsComponent 
+        test="test"
+        test2="test2"
+      />
     </div>)
   }
 }
