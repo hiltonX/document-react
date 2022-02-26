@@ -1045,6 +1045,40 @@ function propsComponent(WrappendComponent) {
 
 const PropsComponent = propsComponent(InputComponent)
 
+// 约定：最大化可组合性
+function Demo(props) {
+  return <div {...props}/>
+}
+// 仅接收一个参数
+function withRouter(MyComponent) {
+  return class extends React.Component {
+    render() {
+      const {...rest} = this.props
+
+      return <MyComponent {...rest}/>
+    }
+  }
+}
+const NavbarWithRouter = withRouter(Demo)
+// 接收多个参数
+const Relay = {
+  createContainer: (MyComponent, config) => {
+    return class extends React.Component {
+      render() {
+        console.log(config, 'config')
+
+        const {...rest} = this.props
+
+        return (<MyComponent {...rest}/>)
+      }
+    }
+  }
+}
+
+const config = 'config'
+
+const CommentWithRelay = Relay.createContainer(Demo, config)
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -1217,6 +1251,13 @@ export default class Advanced extends React.Component {
         test="test"
         test2="test2"
       />
+      <div className="sub-title">约定：最大化可组合性</div>
+      <NavbarWithRouter>
+        仅接收一个参数,也就是被包裹的组件
+      </NavbarWithRouter>
+      <CommentWithRelay>
+        额外接收配置，用于制定组件数据以来
+      </CommentWithRelay>
     </div>)
   }
 }
