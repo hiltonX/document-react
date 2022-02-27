@@ -1,13 +1,13 @@
 import React, {Fragment, Suspense} from 'react'
+import {connect, Provider} from 'react-redux'
+import {createStore} from 'redux'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
 import ErrorBoundry from './error-boundry'
 import ThemedButton from './themed-button'
 import {themes, DynamicThemeContext} from './theme-context'
-
 import {nestThemes, NestThemesContext} from './nest-theme-context'
 import NestThemedButton from './nest-themed-button'
-
 import ErrorBoundary from './error-boundary'
 
 const OtherComponent = React.lazy(() => import('./other-component'))
@@ -444,9 +444,6 @@ function DynamicToolBar(props) {
     ChangeTheme
   </ThemedButton>)
 }
-
-
-
 class DynamicTheme extends React.Component {
   constructor(props) {
     super(props)
@@ -1079,6 +1076,67 @@ const config = 'config'
 
 const CommentWithRelay = Relay.createContainer(Demo, config)
 
+class ConnectComponent extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      todos: [{
+        completd: true,
+        item: '李健'
+      }, {
+        complted: false,
+        item: '千玺'
+      }],
+      visibilityFilter: 'SHOW_ALL'
+    }
+  }
+
+  render() {
+    return (<div>
+      {
+      this.state.todos.map(item => <div>{item.item}</div>)
+    }</div>)
+  }
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+  }
+}
+
+const getVisibleTodos = (todos = [], filter = 'SHOW_All') => {
+  console.log(filter)
+  console.log(todos)
+  switch (filter) {
+    case 'SHOW_All':
+        return todos
+      case 'SHOW_COMPLETED':
+        return todos.filter(t => t.completed)
+      case 'SHOW_ACTIVE':
+        return todos.filter(t => !t.completd)
+      default: 
+        return todos
+  }
+}
+
+const store = createStore(getVisibleTodos)
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter
+      })
+    }
+  }
+}
+
+const ConnectDemo = connect(mapStateToProps, mapDispatchToProps)(ConnectComponent)
+
 export default class Advanced extends React.Component {
 
   render() {
@@ -1258,6 +1316,10 @@ export default class Advanced extends React.Component {
       <CommentWithRelay>
         额外接收配置，用于制定组件数据以来
       </CommentWithRelay>
+      <Provider store={store}>
+        <div className="des">最常见的HOC签名：connect函数</div>
+        <ConnectDemo />
+      </Provider>
     </div>)
   }
 }
