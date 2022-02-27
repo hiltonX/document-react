@@ -1076,6 +1076,7 @@ const config = 'config'
 
 const CommentWithRelay = Relay.createContainer(Demo, config)
 
+// 最常见的HOC签名
 class ConnectComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -1136,6 +1137,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 const ConnectDemo = connect(mapStateToProps, mapDispatchToProps)(ConnectComponent)
+
+// connect解读
+// connect是一个函数，它的返回值是另外一个函数
+const temp = connect(mapStateToProps, mapDispatchToProps)
+// 返回值为HOC，他会返回已经连接redux store的组件
+const CopyConnectDemo = temp(ConnectComponent)
 
 export default class Advanced extends React.Component {
 
@@ -1319,6 +1326,10 @@ export default class Advanced extends React.Component {
       <Provider store={store}>
         <div className="des">最常见的HOC签名：connect函数</div>
         <ConnectDemo />
+      </Provider>
+      <Provider store={store}>
+        <div className="des">分开connect</div>
+        <CopyConnectDemo />
       </Provider>
     </div>)
   }
