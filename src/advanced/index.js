@@ -1144,6 +1144,24 @@ const temp = connect(mapStateToProps, mapDispatchToProps)
 // 返回值为HOC，他会返回已经连接redux store的组件
 const CopyConnectDemo = temp(ConnectComponent)
 
+// 约定：包装显示名称以方便轻松调试
+function reNameWithSubscription(WrappedComponent) {
+  class WithSubscription extends React.Component {
+    render() {
+      return (<WrappedComponent {...this.props}/>)
+    }
+  }
+
+  WithSubscription.displayName = `ReNameWithSubscription(${getDisplayName(WrappedComponent)})`
+
+  return WithSubscription
+}
+
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component'
+}
+
+const NameDemo = reNameWithSubscription(Demo)
 export default class Advanced extends React.Component {
 
   render() {
@@ -1332,6 +1350,10 @@ export default class Advanced extends React.Component {
         <CopyConnectDemo />
       </Provider>
       <div className="des">connect函数返回的单参数HOC具有签名Component => Component</div>
+      <div className="sub-title">约定：包装显示名称以方便轻松挑事</div>
+      <NameDemo>
+        包装显示名称以方便调试
+      </NameDemo>
     </div>)
   }
 }
