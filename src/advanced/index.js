@@ -1331,6 +1331,7 @@ export default class Advanced extends React.Component {
         <div className="des">分开connect</div>
         <CopyConnectDemo />
       </Provider>
+      <div className="des">connect函数返回的单参数HOC具有签名Component => Component</div>
     </div>)
   }
 }
