@@ -1162,6 +1162,17 @@ function getDisplayName(WrappedComponent) {
 }
 
 const NameDemo = reNameWithSubscription(Demo)
+// 注意事项
+// 不要在render方法中使用HOC
+class RenderDemo extends React.Component {
+  render() {
+    // 每次调用render函数都会创建一个新的NewDemo
+    // NewDemo1!== NewDemo2
+    const NewDemo = reNameWithSubscription(Demo)
+    // 这将导致子树每次渲染都会进行卸载，和重新挂载的操作
+    return <NewDemo {...this.props}/>
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -1354,6 +1365,11 @@ export default class Advanced extends React.Component {
       <NameDemo>
         包装显示名称以方便调试
       </NameDemo>
+      <div className="sub-title">注意事项</div>
+      <div className="sub-title">不要在render方法中调用HOC</div>
+      <RenderDemo>
+        不要在render方法中调用HOC，这不仅仅是性能问题-重新挂载组件会导致该组件及其所有子组件状态丢失
+      </RenderDemo>
     </div>)
   }
 }
