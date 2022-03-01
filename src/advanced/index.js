@@ -2,6 +2,7 @@ import React, {Fragment, Suspense} from 'react'
 import {connect, Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import hoistNonReactStatics from 'hoist-non-react-statics'
 
 import ErrorBoundry from './error-boundry'
 import ThemedButton from './themed-button'
@@ -10,8 +11,11 @@ import {nestThemes, NestThemesContext} from './nest-theme-context'
 import NestThemedButton from './nest-themed-button'
 import ErrorBoundary from './error-boundary'
 
+import ImportStaticMethod, {one} from './import-staticMethod'
+
 const OtherComponent = React.lazy(() => import('./other-component'))
 const AnotherComponent = React.lazy(() => import('./another-component'))
+
 
 // ========= 无障碍 =========
 // 标准和指南
@@ -1173,6 +1177,61 @@ class RenderDemo extends React.Component {
     return <NewDemo {...this.props}/>
   }
 }
+
+// 务必复制静态方法
+function staticMethodDemo(WrappendComponent) {
+  WrappendComponent.staticMethod = function() {
+    console.log('static-method')
+  }
+  return class StaticMethodDemo extends React.Component {
+    render() {
+      return <WrappendComponent {...this.props}/>
+    }
+  }
+}
+
+const StaticMethodDemo = staticMethodDemo(Demo)
+
+// 把静态方法拷贝到容器组件
+function copyStaticMethodDemo(WrappendComponent) {
+  WrappendComponent.staticMethod = function() {
+    console.log('static-method')
+  }
+
+  class CopyStaticMethodDemo extends React.Component {
+    render() {
+      return <WrappendComponent {...this.props}/>
+    }
+  }
+
+  CopyStaticMethodDemo.staticMethod = WrappendComponent.staticMethod
+
+  return CopyStaticMethodDemo
+}
+
+const CopyStaticMethodDemo = copyStaticMethodDemo(Demo)
+
+// 自动拷贝所有非React静态方法
+function  autoCopyStaticMethodDemo(WrappendComponent) {
+  WrappendComponent.one = function() {
+    console.log('one')
+  }
+  WrappendComponent.two = function() {
+    console.log('two')
+  }
+
+  class AutoCopyStaticMethodDemo extends React.Component {
+    render() {
+      return <WrappendComponent {...this.props}/>
+    }
+  }
+
+  hoistNonReactStatics(AutoCopyStaticMethodDemo, WrappendComponent)
+
+  return AutoCopyStaticMethodDemo
+}
+
+const AutoCopyStaticMethodDemo = autoCopyStaticMethodDemo(Demo)
 export default class Advanced extends React.Component {
 
   render() {
@@ -1370,6 +1429,17 @@ export default class Advanced extends React.Component {
       <RenderDemo>
         不要在render方法中调用HOC，这不仅仅是性能问题-重新挂载组件会导致该组件及其所有子组件状态丢失
       </RenderDemo>
+      <div className="sub-title">务必复制静态方法</div>
+      <div className="des">增强组件没有static method</div>
+      <div className="des">{typeof StaticMethodDemo.staticMethod}</div>
+      <div className="des">{typeof CopyStaticMethodDemo.staticMethod}</div>
+      <div className="des">{typeof AutoCopyStaticMethodDemo.one}</div>
+      <div className="des">{typeof AutoCopyStaticMethodDemo.two}</div>
+      <ImportStaticMethod>
+        额外导出静态方法
+      </ImportStaticMethod>
+      <div className="des">{typeof one}</div>
+
     </div>)
   }
 }
