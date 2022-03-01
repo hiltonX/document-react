@@ -1439,6 +1439,8 @@ export default class Advanced extends React.Component {
         额外导出静态方法
       </ImportStaticMethod>
       <div className="des">{typeof one}</div>
+      <div className="sub-title">Refs不会被传递</div>
+      <div className="des">虽然高阶组件的约定是将所有props传递给被包装组件，但这对于refs并不适用。因为ref实际上并不是一个prop，就像key一样，是由react专门处理的。</div>
 
     </div>)
   }
