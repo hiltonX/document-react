@@ -1441,6 +1441,9 @@ export default class Advanced extends React.Component {
       <div className="des">{typeof one}</div>
       <div className="sub-title">Refs不会被传递</div>
       <div className="des">虽然高阶组件的约定是将所有props传递给被包装组件，但这对于refs并不适用。因为ref实际上并不是一个prop，就像key一样，是由react专门处理的。</div>
+      <div className="title">与第三方库协同</div>
+      <div className="sub-title">集成带有DOM操作的插件</div>
+      <div className="des">避免冲入的最简单方式就是防止React组件更新。你可以渲染无需更新的React组件，比如一个空的{'<div />'}</div>
 
     </div>)
   }
