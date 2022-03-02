@@ -3,6 +3,7 @@ import {connect, Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import hoistNonReactStatics from 'hoist-non-react-statics'
+import $ from 'jquery'
 
 import ErrorBoundry from './error-boundry'
 import ThemedButton from './themed-button'
@@ -15,7 +16,6 @@ import ImportStaticMethod, {one} from './import-staticMethod'
 
 const OtherComponent = React.lazy(() => import('./other-component'))
 const AnotherComponent = React.lazy(() => import('./another-component'))
-
 
 // ========= 无障碍 =========
 // 标准和指南
@@ -1232,6 +1232,24 @@ function  autoCopyStaticMethodDemo(WrappendComponent) {
 }
 
 const AutoCopyStaticMethodDemo = autoCopyStaticMethodDemo(Demo)
+
+// ======= 与第三方库协同 =========
+// 如何解决这个问题
+class SomePlugin extends React.Component {
+  componentDidMount() {
+    this.$el = $(this.el)
+    this.$el.fadeIn()
+  }
+
+  componentWillUnmount() {
+    this.$el.fadeOut('slow')
+  }
+
+
+  render() {
+    return (<div ref={el => this.el = el}/>)
+  }
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -1444,7 +1462,8 @@ export default class Advanced extends React.Component {
       <div className="title">与第三方库协同</div>
       <div className="sub-title">集成带有DOM操作的插件</div>
       <div className="des">避免冲入的最简单方式就是防止React组件更新。你可以渲染无需更新的React组件，比如一个空的{'<div />'}</div>
-
+      <div className="sub-title">如何解决这个问题</div>
+      <SomePlugin />
     </div>)
   }
 }
