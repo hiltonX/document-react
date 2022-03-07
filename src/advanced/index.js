@@ -1,9 +1,11 @@
 import React, {Fragment, Suspense} from 'react'
+import ReactDOM from 'react-dom'
 import {connect, Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import hoistNonReactStatics from 'hoist-non-react-statics'
 import $ from 'jquery'
+import Backbone from 'Backbone'
 
 import ErrorBoundry from './error-boundry'
 import ThemedButton from './themed-button'
@@ -1308,6 +1310,26 @@ function ReButton() {
 
   return <ChildButton onClick={handleClick} />
 }
+
+// 把react嵌入到backbone视图
+// function Paragraph(props) {
+//   return <p>{props.text}</p>
+// }
+
+// const ParagraphView = Backbone.View.extend({
+//   render() {
+//     const text = this.model.get('text')
+
+//     ReactDOM.render(<Paragraph text={text} />, this.el)
+//     return this
+//   },
+//   remove() {
+//     ReactDOM.unmountComponentAtNode(this.el)
+//     Backbone.View.prototype.remove.call(this)
+//   }
+// })
+
+
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1534,6 +1556,9 @@ export default class Advanced extends React.Component {
       <div id="jqueryContainer"></div>
       <Button />
       <ReButton />
+      <div className="sub-title">把react嵌入到Backbone视图</div>
+      {/* <ParagraphView /> */}
+      <div className="des">没用过Backbone，暂不学习</div>
     </div>)
   }
 }
