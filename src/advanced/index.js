@@ -1296,6 +1296,18 @@ function ChosenExample() {
 function Button() {
   return <button id="re-btn">react组件重写</button>
 }
+// 把逻辑移动到组件中
+function ChildButton(props) {
+  return <button onClick={props.onClick}>移动逻辑</button>
+}
+
+function ReButton() {
+  function handleClick() {
+    alert('re-button')
+  }
+
+  return <ChildButton onClick={handleClick} />
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1521,6 +1533,7 @@ export default class Advanced extends React.Component {
       <div className="sub-title">和其他视图库集成</div>
       <div id="jqueryContainer"></div>
       <Button />
+      <ReButton />
     </div>)
   }
 }
