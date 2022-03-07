@@ -1290,8 +1290,17 @@ function ChosenExample() {
     <option>千玺</option>
   </Chosen>)
 }
-export default class Advanced extends React.Component {
+// 和其他视图库集成
+// 利用react替换基于字符串的渲染
 
+export default class Advanced extends React.Component {
+  componentDidMount() {
+    // jquery实现
+    $('#jqueryContainer').html('<button id="btn">纯jq实现</button>')
+    $('#btn').click(function() {
+      alert('hello')
+    })
+  }
   render() {
     return (<div>
       <div className="title">无障碍</div>
@@ -1506,6 +1515,8 @@ export default class Advanced extends React.Component {
       <SomePlugin />
       <div className="sub-title">集成jQuery Chosen插件</div>
       <ChosenExample />
+      <div className="sub-title">和其他视图库集成</div>
+      <div id="jqueryContainer"></div>
     </div>)
   }
 }
