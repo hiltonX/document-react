@@ -1292,7 +1292,10 @@ function ChosenExample() {
 }
 // 和其他视图库集成
 // 利用react替换基于字符串的渲染
-
+// react组件重写
+function Button() {
+  return <button id="re-btn">react组件重写</button>
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1517,6 +1520,7 @@ export default class Advanced extends React.Component {
       <ChosenExample />
       <div className="sub-title">和其他视图库集成</div>
       <div id="jqueryContainer"></div>
+      <Button />
     </div>)
   }
 }

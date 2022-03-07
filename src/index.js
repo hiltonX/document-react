@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import $ from 'jquery'
 // 核心概念
 import Concept from './concept'
 // 高级指引
@@ -37,7 +38,12 @@ class App extends React.Component {
 
 ReactDOM.render(
   <App />,
-  document.getElementById('root')
+  document.getElementById('root'),
+  function() {
+    $('#re-btn').click(function() {
+      alert('re-btn')
+    })
+  }
 )
 
 
