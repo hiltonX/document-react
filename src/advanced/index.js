@@ -1250,6 +1250,46 @@ class SomePlugin extends React.Component {
     return (<div ref={el => this.el = el}/>)
   }
 }
+
+// 继承jQuery Chosen插件
+class Chosen extends React.Component {
+  componentDidMount() {
+    this.$el = $(this.el)
+    this.$el.attr('color', 'red')
+
+    this.handleChange = this.handleChange.bind(this)
+    this.$el.on('change', this.handleChange)
+  }
+
+  componentWillUnmount() {
+    this.$el.off('change', this.handleChange)
+    this.$el.attr('color', 'green')
+  }
+
+  componentDidUpdate(preProps) {
+    if(preProps.children !== this.props.children) {
+      this.$el.trigger('chisen: updated')
+    }
+  }
+
+  handleChange(e) {
+    this.props.onChange(e.target.value)
+  }
+  render() {
+    return (<div>
+      <select className="Chosen-select" ref={el => this.el = el}>
+        {this.props.children}
+      </select>
+    </div>)
+  }
+}
+
+function ChosenExample() {
+  return (<Chosen onChange={value => console.log(value)}>
+    <option>李健</option>
+    <option>千玺</option>
+  </Chosen>)
+}
 export default class Advanced extends React.Component {
 
   render() {
@@ -1464,6 +1504,8 @@ export default class Advanced extends React.Component {
       <div className="des">避免冲入的最简单方式就是防止React组件更新。你可以渲染无需更新的React组件，比如一个空的{'<div />'}</div>
       <div className="sub-title">如何解决这个问题</div>
       <SomePlugin />
+      <div className="sub-title">集成jQuery Chosen插件</div>
+      <ChosenExample />
     </div>)
   }
 }
