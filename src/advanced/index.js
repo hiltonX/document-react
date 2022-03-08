@@ -1573,6 +1573,12 @@ export default class Advanced extends React.Component {
         {color: 'blue', shadowSize: 2},
         'JSX'
       )}
+      <div className="des">无子节点</div>
+      <div attr-des="无子节点"/>
+      {React.createElement(
+        'div',
+        {attrDes: '编译后无子节点'}
+      )}
     </div>)
   }
 }
