@@ -1330,6 +1330,12 @@ function ReButton() {
 // })
 
 
+// ======= 深入JSX =========
+function MyButton(props) {
+  return <button {...props}></button>
+}
+
+
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1559,6 +1565,14 @@ export default class Advanced extends React.Component {
       <div className="sub-title">把react嵌入到Backbone视图</div>
       {/* <ParagraphView /> */}
       <div className="des">没用过Backbone，暂不学习</div>
+      <div className="title">深入JSX</div>
+      <div className="des">JSX仅仅只是React.createElement(component, props, ...children)函数的语法糖</div>
+      <MyButton color="blue">Click me</MyButton>
+      {React.createElement(
+        MyButton,
+        {color: 'blue', shadowSize: 2},
+        'JSX'
+      )}
     </div>)
   }
 }
