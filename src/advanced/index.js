@@ -13,6 +13,7 @@ import {themes, DynamicThemeContext} from './theme-context'
 import {nestThemes, NestThemesContext} from './nest-theme-context'
 import NestThemedButton from './nest-themed-button'
 import ErrorBoundary from './error-boundary'
+import WarningButton from './custom-button'
 
 import ImportStaticMethod, {one} from './import-staticMethod'
 
@@ -1579,6 +1580,9 @@ export default class Advanced extends React.Component {
         'div',
         {attrDes: '编译后无子节点'}
       )}
+      <div className="sub-title">指定React元素类型</div>
+      <div className="sub-title">React必须在作用域内</div>
+      <WarningButton />
     </div>)
   }
 }
