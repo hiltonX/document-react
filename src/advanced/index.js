@@ -1337,6 +1337,14 @@ function MyButton(props) {
 }
 
 
+// 在JSX类型中使用点语法
+const JSXMyComponent = {
+  DatePicker: function DatePicker(props) {
+    return <div>Imagin a {props.color} datepicker here</div>
+  }
+}
+
+
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1583,6 +1591,8 @@ export default class Advanced extends React.Component {
       <div className="sub-title">指定React元素类型</div>
       <div className="sub-title">React必须在作用域内</div>
       <WarningButton />
+      <div className="sub-title">在JSX类型中使用点语法</div>
+      <JSXMyComponent.DatePicker color="blue" />
     </div>)
   }
 }
