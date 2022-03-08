@@ -1344,6 +1344,23 @@ const JSXMyComponent = {
   }
 }
 
+// 用户定义的组件必须以大写字母开头
+function hello(props) {
+  // div是一个有效html标签
+  return <div>Hello, {props.toWhat}</div>
+}
+
+function HelloWorld() {
+  return <hello toWhat="world"/>
+}
+
+function Hello(props) {
+  return <div>Hello, {props.toWhat}</div>
+}
+
+function TrueHelloWorld() {
+  return <Hello toWhat="world"/>
+}
 
 export default class Advanced extends React.Component {
   componentDidMount() {
@@ -1593,6 +1610,11 @@ export default class Advanced extends React.Component {
       <WarningButton />
       <div className="sub-title">在JSX类型中使用点语法</div>
       <JSXMyComponent.DatePicker color="blue" />
+      <div className="sub-title">用户定义的组件必须以大写字母开头</div>
+      <div className="des">错误demo</div>
+      <HelloWorld />
+      <div className="des">正确demo</div>
+      <TrueHelloWorld />
     </div>)
   }
 }
