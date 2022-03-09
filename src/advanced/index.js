@@ -1362,6 +1362,23 @@ function TrueHelloWorld() {
   return <Hello toWhat="world"/>
 }
 
+// 在运行时选择类型
+const storyComponents = {
+  photo: Demo,
+  video: Demo
+}
+
+// 错误demo
+// function Store(props) {
+//   return <storyComponent[props.storyType] story={props.story} />
+// }
+
+function Story(props) {
+  // JSX类型可以是大写字母开头的变量
+  const SpecificStory = storyComponents[props.storyType]
+
+  return <SpecificStory children={props.storyType} />
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1615,6 +1632,9 @@ export default class Advanced extends React.Component {
       <HelloWorld />
       <div className="des">正确demo</div>
       <TrueHelloWorld />
+      <div className="sub-title">在运行时选择类型</div>
+      <div className="des">如果想通过表达式来决定元素的类型，首先需先将它赋值给大写字母开头的变量</div>
+      <Story storyType="video"/>
     </div>)
   }
 }
