@@ -1379,6 +1379,61 @@ function Story(props) {
 
   return <SpecificStory children={props.storyType} />
 }
+
+
+// JSX中props
+// Javascript表达式
+function Demo1(props) {
+  return <div attr-sum={1+2+3+4}>javascript表达式</div>
+}
+function Demo2(props) {
+  let description;
+  if(props.number % 2 === 0) {
+    description = <strong>even</strong>
+  } else {
+    description = <i>odd</i>
+  }
+
+  return <div>{props.number} is an {description} number</div>
+}
+// 字符串字面量
+function Demo3(props) {
+  return <Demo children="字符串字面量"/>
+}
+
+function Demo4(props) {
+  return <Demo children={`字符串字面量`}/>
+}
+// 赋值给props时值是未转译的
+function Demo5(props) {
+  return <Demo children="&lt;3"/>
+}
+
+function Demo6(props) {
+  return <Demo children={'<3'}/>
+}
+
+// props默认值为true
+function Demo7(props) {
+  return <Demo autocomplete children="props默认值为true"/>
+}
+
+function Demo8(props) {
+  return <Demo autocomplete={true} children="props默人值为true" />
+}
+// 属性展开
+function Demo9(props) {
+  const {oprate, ...others} = props
+  
+  let oprateType;
+  if(oprate === 'edit') {
+    oprateType = '编辑'
+  } else {
+    oprateType = '新增'
+  }
+
+  return <Demo {...others} children={oprateType} />
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1635,6 +1690,22 @@ export default class Advanced extends React.Component {
       <div className="sub-title">在运行时选择类型</div>
       <div className="des">如果想通过表达式来决定元素的类型，首先需先将它赋值给大写字母开头的变量</div>
       <Story storyType="video"/>
+      <div className="sub-title">JSX中的props</div>
+      <div className="sub-title">javascript表达式作为props</div>
+      <Demo1 />
+      <Demo2 number={0} />
+      <Demo2 number={1} />
+      <div className="sub-title">字符串字面亮</div>
+      <Demo3 />
+      <Demo4 />
+      <Demo5 />
+      <Demo6 />
+      <div className="sub-title">props默认值为true</div>
+      <Demo7 />
+      <Demo8 />
+      <div className="sub-title">属性展开</div>
+      <Demo9 oprate="edit" a={1} b={2}/>
+      <Demo9 oprate="add" a={1} b={2}/>
     </div>)
   }
 }
