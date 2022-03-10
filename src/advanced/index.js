@@ -1434,6 +1434,35 @@ function Demo9(props) {
 
   return <Demo {...others} children={oprateType} />
 }
+
+// JSX中的子元素
+// 字符串字面量
+function Demo10(props) {
+  return <Demo>hello</Demo>
+}
+
+function Demo11(props) {
+  return <Demo><div>This is valid HTML &amp; JSX at the same time</div></Demo>
+}
+
+function Demo12(props) {
+  return <>
+    <Demo>
+      <div>Hello World</div>
+      <div>
+        Hello World
+      </div>
+      <div>
+        Hello
+        World
+      </div>
+      <div>
+
+        Hello world
+      </div>
+    </Demo>
+  </>
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1695,7 +1724,7 @@ export default class Advanced extends React.Component {
       <Demo1 />
       <Demo2 number={0} />
       <Demo2 number={1} />
-      <div className="sub-title">字符串字面亮</div>
+      <div className="sub-title">字符串字面量</div>
       <Demo3 />
       <Demo4 />
       <Demo5 />
@@ -1706,6 +1735,11 @@ export default class Advanced extends React.Component {
       <div className="sub-title">属性展开</div>
       <Demo9 oprate="edit" a={1} b={2}/>
       <Demo9 oprate="add" a={1} b={2}/>
+      <div className="sub-title">JSX中的子元素</div>
+      <div className="sub-title">字符串字面量</div>
+      <Demo10 />
+      <Demo11 />
+      <Demo12 />
     </div>)
   }
 }
