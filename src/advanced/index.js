@@ -1754,6 +1754,11 @@ export default class Advanced extends React.Component {
         <Demo2 />
       </div>
       <Demo13 />
+      <div className="sub-title">Javascript表达式作为子元素</div>
+      <Demo>foo</Demo>
+      <Demo>{'foo'}</Demo>
+      {['李健', '千玺'].map(item => <Demo>{item}</Demo>)}
+      <Hello toWhat={'组合'}/>
     </div>)
   }
 }
