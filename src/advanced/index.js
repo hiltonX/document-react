@@ -1471,6 +1471,25 @@ function Demo13(props) {
     <li>组</li>
   ]
 }
+
+
+// 函数作为子元素
+function Repeat(props) {
+  let items = []
+  for(let i = 0; i < props.numTimes; i++) {
+    items.push(props.children(i))
+  }
+
+  return <div>{items}</div>
+}
+
+function ListOfTenThings() {
+  return (
+    <Repeat numTimes={10}>
+      {(i) => <div key={i}>this is item {i} in the list</div>}  
+    </Repeat>
+  )
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1759,6 +1778,8 @@ export default class Advanced extends React.Component {
       <Demo>{'foo'}</Demo>
       {['李健', '千玺'].map(item => <Demo>{item}</Demo>)}
       <Hello toWhat={'组合'}/>
+      <div className="sub-title">函数作为子元素</div>
+      <ListOfTenThings />
     </div>)
   }
 }
