@@ -1490,6 +1490,14 @@ function ListOfTenThings() {
     </Repeat>
   )
 }
+
+// 布尔类型，null以及undefined将会忽略
+function Demo14(props) {
+  return (<>
+    {props.message.length && <div>{props.message}</div>}
+    {props.message.length > 0 && <div>{props.message}</div>}
+  </>)
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1780,6 +1788,21 @@ export default class Advanced extends React.Component {
       <Hello toWhat={'组合'}/>
       <div className="sub-title">函数作为子元素</div>
       <ListOfTenThings />
+      <div className="sub-title">布尔类型、Null、以及Undefined将会忽略</div>
+      <div className="des">闭合标签</div>
+      <div />
+      <div></div>
+      <div>false: {false}</div>
+      <div>null: {null}</div>
+      <div>undefined: {undefined}</div>
+      <div>true: {true}</div>
+      <div>{
+        true && <div>为true特定函数</div>
+        }特定条件渲染</div>
+      <div className="des">falsy值,比如数字0</div>
+      <Demo14 message=""/>
+      <div className="des">想要渲染false，true，null，undefined先转换为字符串</div>
+      <div>{String(true)}</div>
     </div>)
   }
 }
