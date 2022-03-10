@@ -1463,6 +1463,14 @@ function Demo12(props) {
     </Demo>
   </>
 }
+
+// JSX子元素
+function Demo13(props) {
+  return [
+    <li>数</li>,
+    <li>组</li>
+  ]
+}
 export default class Advanced extends React.Component {
   componentDidMount() {
     // jquery实现
@@ -1740,6 +1748,12 @@ export default class Advanced extends React.Component {
       <Demo10 />
       <Demo11 />
       <Demo12 />
+      <div className="sub-title">JSX子元素</div>
+      <div>
+        <Demo1 />
+        <Demo2 />
+      </div>
+      <Demo13 />
     </div>)
   }
 }
