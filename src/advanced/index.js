@@ -1803,6 +1803,8 @@ export default class Advanced extends React.Component {
       <Demo14 message=""/>
       <div className="des">想要渲染false，true，null，undefined先转换为字符串</div>
       <div>{String(true)}</div>
+      <div className="title">性能优化</div>
+
     </div>)
   }
 }
