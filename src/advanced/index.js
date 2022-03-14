@@ -1793,7 +1793,7 @@ export default class Advanced extends React.Component {
       <div />
       <div></div>
       <div>false: {false}</div>
-      <div>null: {null}</div>
+      <div>null: {null}</div> 
       <div>undefined: {undefined}</div>
       <div>true: {true}</div>
       <div>{
@@ -1805,7 +1805,6 @@ export default class Advanced extends React.Component {
       <div>{String(true)}</div>
       <div className="title">性能优化</div>
       <div className="sub-title">使用生产版本</div>
-      <div className="sub-title">placeholder</div>
 
     </div>)
   }
