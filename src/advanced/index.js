@@ -1805,7 +1805,9 @@ export default class Advanced extends React.Component {
       <div>{String(true)}</div>
       <div className="title">性能优化</div>
       <div className="sub-title">使用生产版本</div>
+      <div className="des">通过Chrome 的 React 开发者工具来判断是否是生产版本。若不是，则图标红色</div>
 
+      
     </div>)
   }
 }
